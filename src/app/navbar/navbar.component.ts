@@ -7,7 +7,7 @@ import { NgClass, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
-  imports: [NgClass, NgIf, RouterLink ],
+  imports: [NgIf, RouterLink ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })

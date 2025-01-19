@@ -1,0 +1,1276 @@
+/******************************** GOOGLE FONTS ***********************************/
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+
+
+
+/************************** CSS STYLINGS FOR GENERAL STRUCTURE OF THE WEBPAGE ********************/
+:root {
+    --primary-color: #28bf96;
+    --primary-color-dark: #209677;
+    --text-dark: #111827;
+    --text-light: #6b7280;
+    --white: #ffffff;
+}
+
+#mobile-view{
+    display: none;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+}
+
+a{
+    cursor: pointer;
+    text-decoration: none;
+    color: #ffd4fd;
+}
+
+
+/************************************ CSS STYLINGS FOR NAVBAR ********************************/
+
+
+.navbar {
+    padding: 1rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    background: #EBFBFF;
+}
+
+.nav__logo {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.nav__links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    font-size: medium;
+    font-weight: 600;
+}
+
+.nav__links a:hover{
+    color: #003b2c;
+    font-size: large;
+}
+
+.link a {
+    text-decoration: none;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn {
+    padding: 1rem 2rem;
+    outline: none;
+    border: none;
+    font-size: 1rem;
+    color: #ffffff;
+    font-size: large;
+    background-color: var(--shade-2);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+
+
+.btn:hover {
+    background-color: #007552;
+}
+
+.container {
+  max-width: 100%;
+    margin: auto;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/******************************** CSS STYLINGS FOR SEARCH BAR ELEMENT ***********************************/
+
+.search-container{
+    text-align: center;
+    background-color: var(--shade-1);
+    padding: 40px;
+    margin-bottom: 40px;
+    justify-content: center;
+    align-items: center;
+    color: #ffff;
+}
+
+
+
+/******************************** CSS STYLINGS FOR HEADER ELEMENT ***********************************/
+
+.header {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    align-items: center;
+    max-width: 1300px;
+    margin: 2rem auto;
+}
+
+.content h1 {
+    margin-bottom: 1rem;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.content h1 span {
+    font-weight: 400;
+}
+
+.content p {
+    margin-bottom: 2rem;
+    color: var(--text-light);
+    line-height: 1.75rem;
+    text-align: justify;
+}
+
+.image {
+    position: relative;
+    text-align: center;
+    isolation: isolate;
+    border-radius: 50%;
+}
+
+
+.image img {
+    width: 100%;
+    max-width: 475px;
+    border-radius: 50%;
+}
+
+
+/*=========================== what-we-provide =========================*/
+.mc1{
+  background-color: var(--shade-1);
+  padding: 20px 0;
+}
+.what-we-provide{
+    max-width: 1500px;
+    width: 90%;
+    margin: 50px auto;
+    display: flex;
+    justify-content: center;
+}
+.w-info-box{
+    width: 300px;
+    margin: 15px 15px 15px 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.w-info-icon{
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    margin-right: 15px;
+    font-size: 1.9rem;
+    color: var(--shade-2);
+}
+.w-info-text{
+    display: flex;
+    flex-direction: column;
+}
+.w-info-text strong{
+    color: var(--shade-3);
+    font-weight: 700;
+}
+.w-info-text p{
+    color: var(--light);
+    font-size: 0.9rem;
+    letter-spacing: 0.3px;
+}
+.w-i-box1 .w-info-icon{
+    background-color: var(--light);
+}
+.w-i-box2 .w-info-icon{
+    background-color: var(--light);
+}
+.w-i-box3 .w-info-icon{
+    background-color: var(--light);
+}
+
+
+#our_story{
+    background-color: #f5f7fb;
+    max-width: 1200px;
+    width: 90%;
+    margin: 80px auto;
+    border: 10px solid #001509;
+    box-shadow: 2px 2px 30px rgba(0,0,0,0.12);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.our-story-img{
+    position: relative;
+    display: flex;
+}
+.our-story-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+.story-play-btn{
+    position: absolute;
+    left: 10px;
+    top: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #dd3f3f;
+    padding: 20px 10px;
+    border-radius: 4px 4px 10px 10px;
+    color: #ffffff;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+.story-play-btn i{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #aa2f0a;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.our-stroy-text{
+    padding: 50px;
+}
+.our-stroy-text h2{
+    font-size: 2.8rem;
+    color: #122853;
+    line-height: 3rem;
+}
+.our-stroy-text p{
+    color: #535353;
+    font-size: 0.9rem;
+    margin: 10px 0px;
+    line-height: 1.4rem;
+    letter-spacing: 0.3px;
+}
+.our-stroy-text p a{
+    color: #122853;
+    text-decoration: underline;
+}
+.story-numbers-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    margin-top: 20px;
+}
+.story-numbers-box{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 10px;
+}
+.story-numbers-box strong{
+    color: #122853;
+    font-weight: 700;
+    font-size: 1.8rem;
+}
+.story-numbers-box span{
+    color: #535353;
+    font-size: 0.9rem;
+}
+.s-n-box1{
+    background-color: #d4fff5;
+}
+.s-n-box2{
+    background-color: #d4ffe2;
+}
+.s-n-box3{
+    background-color: #d4f9ff;
+}
+.s-n-box4{
+    background-color: #d4ffee;
+}
+
+
+
+
+/******************************** CSS STYLINGS FOR ABOUT US ELEMENT ***********************************/
+
+.about-us {
+    margin: 50px 0;
+}
+
+.about-us-content {
+    width: 100%;
+    margin: 30px auto;
+    padding: 50px 60px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    object-fit: cover;
+    background-position: center;
+    color: #fff;
+    text-align: center;
+    /* Decrease opacity */
+    background: linear-gradient(rgba(250,250,250, 0.6),
+rgba(250,250,250, 0.8)), url('https://img.freepik.com/free-psd/interior-modern-emergency-room-with-empty-nurses-station-generative-ai_587448-2137.jpg?size=626&ext=jpg&ga=GA1.1.539837299.1709856000&semt=ais');
+}
+
+.about-us h1 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.about-us p {
+    font-size: 20px;
+    font-weight: 500;
+    color: #2b2b2b;
+    line-height: 1.6;
+    margin: 15px auto;
+    text-align: justify;
+}
+
+
+/******************************** CSS STYLINGS FOR ADVERTISEMENT IMAGE ***********************************/
+
+.image-ad img{
+    width: 100%;
+}
+
+
+/******************************** CSS STYLINGS FOR subscription-plans ELEMENT ***********************************/
+
+.subscription-plans-section {
+  padding: 40px 20px;
+  background-color: var(--shade-3);
+  text-align: center;
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: var(--shade-2);
+}
+
+.section-description {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  color: #7f8c8d;
+}
+
+/* Plans Container */
+.plans-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Plan Card Styling */
+.plan-card {
+  background: #ffffff;
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+  width: 300px;
+  height: 300px;
+  padding: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  color: var(--dark);
+}
+
+.plan-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.most-popular {
+  background-color: var(--shade-1);
+  height: 400px;
+  color: var(--light) !important;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  .plan-price{
+    color: var(--light);
+  }
+  .plan-title{
+    color: var(--light);
+  }
+  .select-button{
+    background-color: var(--light);
+    color: var(--shade-1);
+  }
+}
+
+/* Plan Title and Price */
+.plan-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.plan-price {
+  font-size: 1.2rem;
+  color: var(--shade-2);
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+/* Features List */
+.plan-features {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.plan-features li {
+  margin: 10px 0;
+  font-size: 1rem;
+}
+
+/* Button Styling */
+.select-button {
+  background-color: var(--shade-1);
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.select-button:hover {
+  background-color: var(--shade-2);
+}
+
+
+/******************************** CSS STYLINGS FOR SERVICES ELEMENT ***********************************/
+
+#our-services{
+    width: 100%;
+    margin: 0px auto;
+    background-color: #f5f7fb;
+    padding: 50px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.services-heading{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    width: 90%;
+    margin: auto;
+}
+.services-heading-text strong{
+    color: #014dd5;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+.services-heading-text h2{
+    font-size: 2.2rem;
+    color: #122853;
+    font-weight: 700;
+    max-width: 600px;
+}
+.swiper-button-next,
+.swiper-button-prev{
+    position: static !important;
+    transform: translate(0,0);
+    margin: 10px !important;
+}
+.service-slide-btns{
+    display: flex;
+    justify-content: center;
+    align-items: center;}
+.swiper-button-next::after,
+.swiper-button-prev::after{
+    font-size: 25px !important;
+    font-weight: 800;
+    color: #122853;
+}
+.services-box-container{
+    max-width: 1200px;
+    width: 90%;
+    margin: 40px auto;
+    overflow: hidden;
+}
+.service-slide-btns button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  padding: 10px;
+}
+.slider-wrapper{
+  display: flex;
+  align-items: center;
+}
+.slider-item{
+  width: 350px;
+  min-width: 350px;
+}
+.service-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    max-width: 100%;/*350px*/
+    border: 5px solid #000000;
+    margin-right: 2px;
+    padding: 30px;
+}
+.service-box:hover{
+    border: 5px solid #c7d0eb;
+}
+.service-box i{
+    font-size: 2rem;
+    color: #122853;
+    width: 60px;
+    height: 60px;
+    border-radius:5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.service-box strong{
+    color: #122853;
+    font-size: 1.4rem;
+    margin-top: 20px;
+}
+.service-box p{
+    font-size: 0.9rem;
+    line-height: 1.4rem;
+    color:#122853;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.service-box a{
+    height: 45px;
+    background-color: #122853;
+    color: #ffffff;
+    padding: 0px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 5px;
+    margin-top: 30px;
+}
+.s-box1 i{
+    background-color: #fbd4ff;
+}
+.s-box2 i{
+    background-color: #d4ffe1;
+}
+.s-box3 i{
+    background-color: #ffdad4;
+}
+.s-box4 i{
+    background-color: #faf4b8;
+}
+
+.s-box1{
+    background-color: #f8ecfd;
+}
+.s-box2{
+    background-color: #edfff3;
+}
+.s-box3{
+    background-color: #fff0ee;
+}
+.s-box4{
+    background-color: #fcffcf;
+}
+.service-btn{
+    color: #535353;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    text-align: center;
+    padding: 0px 10px;
+}
+.service-btn a{
+    color: var(--shade-2);
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+/*========================== why-choose-us =================================*/
+#why-choose-us{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+}
+.why-choose-us-left{
+    padding: 50px;
+    background-color: var(--shade-1);
+}
+.why-choose-us-right{
+    background-color: var(--shade-2);
+    padding: 50px;
+}
+.why-choose-us-right h3,
+.why-choose-us-left h3{
+    font-size: 2.6rem;
+    color: #ffffff;
+    font-weight: 600;
+    line-height: 3.2rem;
+}
+.why-choose-box-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 20px;
+    grid-gap: 10px;
+}
+.why-choose-box{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px;
+}
+.why-choose-box i{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--shade-1);
+    font-size: larger;
+    background-color: var(--light);
+    margin-right: 10px;
+}
+.why-choose-us-btn{
+  background-color: var(--light) !important;
+  color: var(--shade-1) !important;
+  font-size: larger !important;
+  font-weight: 600;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  margin-top: 30px;
+  font-size: 0.9rem;
+  border: none;
+}
+.why-choose-box-text{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.why-choose-box-text strong{
+    color: #ffffff;
+    font-weight: 600;
+}
+.why-choose-box-text p{
+    color: #ececec;
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+.why-choose-us-right p{
+    color: #dfdfdf;
+    font-size: 0.8rem;
+    line-height: 1.4rem;
+    letter-spacing: 0.5px;
+    margin: 10px 0px;
+}
+.w-right-contact-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.w-right-contact-box{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 10px;
+}
+.w-right-contact-box i{
+    width: 50px;
+    height: 50px;
+    background-color:var(--light);
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--shade-2);
+    font-size: 1.2rem;
+    margin-right: 10px;
+}
+.w-right-contact-box-text{
+    display: flex;
+    flex-direction: column;
+}
+.w-right-contact-box-text span{
+    color: #e4e4e4;
+    font-size: 0.7rem;
+}
+.w-right-contact-box-text strong{
+    font-size: 1rem;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/******************************** CSS STYLINGS FOR TAGGING ELEMENT ***********************************/
+
+.greet-container {
+    position: relative;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin: 30px auto;
+    height: 180px;
+    padding: 25px;
+    background-image: url("https://images.pexels.com/photos/5340280/pexels-photo-5340280.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    background-size: cover;
+    background-position: center;
+    border-radius: 6px;
+    color: rgb(0, 45, 63);
+    z-index: 0;
+}
+
+.greet-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.5);
+    z-index: -1;
+}
+
+
+
+/******************************** CSS STYLINGS FOR FAQs ***********************************/
+
+
+.faq-container {
+    max-width: 1200px;
+    margin: 90px auto;
+}
+
+.faq-container h2{
+    margin: 20px auto;
+}
+
+details {
+    border: 1px solid #ddd;
+    margin: 20px auto;
+    padding: 15px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all ease 3s;
+}
+
+details p{
+    padding: 10px 0 0 20px;
+}
+
+summary {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+details[open] {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+}
+
+
+
+/*========================== Testimonials =============================*/
+.reviews-contact-section{
+  display: flex;
+  width: 100%;
+  background-color: #f5f7fb;
+}
+#testimonials {
+    padding: 50px 0px;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.testimonials-heading {
+    max-width: 1200px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.testimonials-heading h3 {
+    font-size: 2.4rem;
+    color: #122853;
+}
+
+.testimonials-heading p {
+    color: #535353;
+    margin-top: 10px;
+    max-width: 600px;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    line-height: 1.4rem;
+}
+
+.testimonials-content {
+    width: 90%;
+    display: flex;
+    overflow-x: scroll;
+    align-items: center;
+    gap: 16px;
+    margin-top: 18px;
+}
+
+.testimonials-box-container {
+    margin-top: 50px;
+    overflow: hidden;
+}
+
+.testimonials-box {
+    padding: 10px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    min-width: 250px;
+    height: 300px;
+    background-color: var(--shade-1);
+}
+
+.t-profile {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.t-profile-img {
+    width: 70px;
+    height: 70px;
+    border-radius: 6px;
+    background-color: #c7d0eb;
+    margin-right: 10px;
+    overflow: hidden;
+}
+
+.t-profile-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.t-profile-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.t-profile-text strong {
+    color: var(--shade-3);
+    font-size: 1.2rem;
+}
+
+.t-profile-text span {
+    color: var(--light);
+    font-size: 0.9rem;
+    letter-spacing: 0.3px;
+}
+
+.t-rating {
+    font-size: 0.8rem;
+    color: var(--shade-3);
+    margin-top: 5px;
+}
+
+.testimonials-box p {
+    font-size: 0.9rem;
+    color: var(--light);
+    line-height: 1.4rem;
+    letter-spacing: 0.3px;
+    margin-top: 10px;
+}
+
+.swiper-pagination {
+    position: static !important;
+}
+
+
+/******************************** CSS STYLINGS FOR CONTACTS ELEMENT ***********************************/
+
+.contact-parent-container{
+    display: flex;
+    width: 40%;
+    justify-content: center;
+    margin: 70px auto;
+}
+
+.contact{
+    padding: 20px 15px;
+    border-radius: 12px;
+    justify-items: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    width: 450px;
+    height: 500px;
+    background-color: #d5dfe0c9;
+    box-shadow: 7px 6px 6px 0px rgba(0, 0, 0, 0.2);
+    textarea{
+      resize: none;
+      border: none;
+    }
+}
+
+input{
+    outline: none;
+    border: none;
+    padding: 10px;
+    font-size: large;
+    font-weight: 400;
+    border-radius: 8px;
+    width: 90%;
+    margin: 15px;
+}
+
+.message{
+    height: 260px;
+    width: 90%;
+    padding: 10px;
+    margin: none;
+    outline: none;
+    font-size: large;
+    font-weight: 400;
+    font-family: "Roboto", sans-serif;
+    border-radius: 8px;
+}
+
+.submit{
+    margin: 20px 0;
+    padding: 6px;
+    width: 120px;
+    height: 40px;
+    font-size: large;
+    font-weight: 600;
+    background-color: #00275a;
+    color:#ffff;
+    border: none;
+    border-radius: 8px;
+    transition: all ease 1s;
+}
+
+.submit:hover{
+    box-shadow: 7px 6px 6px 0px rgba(0, 0, 0, 0.2);
+    background-color: #0046a1;
+}
+
+
+/**************Quick Functionalities***************/
+.quick-functionalities{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+  background-color: var(--shade-1);
+  color: var(--light);
+  h2{
+    font-weight: 600;
+  }
+}
+.quick-functionalities-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 0;
+}
+.mf{
+  background-color: var(--light);
+  padding: 18px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  i{
+    font-size: 42px;
+    margin: 10px 0;
+  }
+  span{
+    font-size: medium;
+    font-weight: 500;
+  }
+}
+@media screen and (max-width:800px) {
+    .header{
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
+
+/******************************** CSS STYLINGS FOR TABLET VIEW ***********************************/
+
+@media screen and (max-width:800px) {
+
+    .navbar{
+        padding: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .hamburger-button {
+        background-color: transparent;
+        color: rgb(0, 0, 0);
+        outline: none;
+        border: none;
+        font-weight: 700;
+        font-size: 34px;
+        transition: all ease 1s;
+        cursor: pointer;
+     }
+
+     .nav-links {
+        display: none;
+        background-color: #333;
+        color: white;
+     }
+
+     .hamburger-menu{
+        width: 100%;
+     }
+
+     .nav-links a {
+        display: block;
+        padding: 15px;
+        color: white;
+        text-decoration: none;
+     }
+     .nav-links a:hover {
+        background-color: #111;
+        z-index: 2;
+        position: relative;
+     }
+
+
+    #pc-view{
+        display: none;
+    }
+
+    #mobile-view{
+        display: flex;
+    }
+
+    .header{
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .content{
+        width: 100%;
+    }
+
+    .nav-head{
+        width: 80%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px 20px;
+    }
+
+    nav{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .faq-container{
+        max-width: 87%;
+    }
+
+    .testimonials-content{
+        padding-top: 450px;
+    }
+
+    #our_story{
+        grid-template-columns: 1fr;
+    }
+    .our-story-img img{
+        max-height: 400px;
+    }
+    .our-stroy-text{
+        padding: 30px;
+    }
+
+    .what-we-provide{
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 20px;
+    }
+
+    #why-choose-us{
+        grid-template-columns: 1fr;
+    }
+
+    .nav1{
+        display: none;
+    }
+}
+
+
+/******************************** CSS STYLINGS FOR MOBILE POTRAIT VIEW ***********************************/
+
+@media screen and (max-width:550px) {
+    nav{
+        padding: 0.6rem;
+    }
+
+    .nav__links {
+        gap: 0.7rem;
+    }
+
+    .nav-head{
+        padding: 1px;
+    }
+
+    .search-bar{
+        width: 90%;
+    }
+
+    .image__bg{
+        display: none;
+    }
+
+    .image__content__2{
+        display: none;
+    }
+
+    .image__content__1 {
+        transform: translate(calc(-50% + 6rem), calc(-50% + 6rem));
+    }
+
+    .details h4{
+        font-size: medium;
+    }
+
+    .details p{
+        font-size: small;
+    }
+
+    .about-us-content{
+        padding: 20px;
+    }
+
+    .about-us-content p{
+        font-size: medium;
+    }
+
+    .subscription-plans li{
+        font-size: medium;
+        text-align: justify;
+    }
+
+    .contact{
+        width: 350px;
+    }
+
+    .what-we-provide{
+        grid-template-columns: 1fr;
+    }
+    .our-stroy-text{
+        padding: 20px 15px;
+    }
+    .story-numbers-box{
+        padding: 15px;
+    }
+    .story-numbers-box strong{
+        font-size: 1.4rem;
+    }
+
+    .testimonials-content{
+        padding-top: 500px;
+    }
+
+}
+
+
+
+/******************************** CSS STYLINGS FOR MOBILE VIEW ***********************************/
+
+@media screen and (max-width:390px) {
+
+    nav{
+        padding:10px 3px;
+    }
+
+    .nav__links {
+        gap: 0.5rem;
+        font-size: small;
+    }
+
+    .nav-head{
+        padding: 3px;
+    }
+
+    .btn{
+        padding: 12px;
+        font-size: medium;
+    }
+
+    .contact{
+        width: 290px;
+    }
+
+    .testimonials-content{
+        padding-top: 660px;
+    }
+}
+
+
+

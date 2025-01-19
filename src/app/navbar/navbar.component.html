@@ -1,0 +1,59 @@
+<nav>
+  <a href="">
+    <img src="logo.png" alt="" class="logo">
+    <span class="logo" [routerLink]="['']">MediCure</span>
+  </a>
+  <div class="search">
+    <input
+      type="search"
+      placeholder="Type services to search..."
+      name="search"
+      class="search-bar"
+    />
+    <button type="submit" class="mic-button">
+      <i class="fa-solid fa-microphone"></i>
+    </button>
+    <button type="submit" class="search-button">
+      <i class="fa fa-search"></i>
+    </button>
+  </div>
+  <div class="menu">
+    <a (click)="goToSection('')"><p>Services</p></a>
+    <a (click)="goToSection('gallery')"><p>Plans</p></a>
+
+    <div class="buttonContainer">
+      <div *ngIf="!loggedIn">
+        <button (click)="router.navigate(['/login'])" id="login" class="AuthButtons">Login/Register</button>
+      </div>
+      <div *ngIf="loggedIn">
+        <button (click)="router.navigate([isAdmin ? '/admin' : '/user'])" class="AuthButtons">
+          <i class="fa-solid fa-user"></i>&nbsp;Dashboard
+        </button>
+        <button (click)="logout()" class="AuthButtons">Logout&nbsp;<i class="fa-solid fa-right-from-bracket"></i></button>
+      </div>
+    </div>
+  </div>
+</nav>
+<div class="nav-mobile">
+<a href="">
+  <img src="logo.png" alt="" class="logo">
+</a>
+<button class="toggleNav" (click)="displayNavMobile()"><i class="fa-solid fa-bars-staggered"></i></button>
+<div class="nav-elements" id="navMobile">
+  <span class="closeNav" (click)="closeNav()" style="text-align: right; color: #ffacac;"><i class="fa-solid fa-xmark"></i></span>
+  <a (click)="goToSection('')">Home</a>
+  <a (click)="goToSection('about')">About</a>
+  <a (click)="goToSection('contact')">Contact</a>
+  <div class="buttonContainer">
+    <div *ngIf="!loggedIn">
+      <button (click)="router.navigate(['/login'])">Login&nbsp;<i class="fa-solid fa-right-to-bracket"></i></button>
+    </div>
+    <div *ngIf="loggedIn" class="userBtn">
+      <!-- <button (click)="router.navigate([isAdmin ? '/admin-dashboard' : '/user-dashboard'])">
+        Dashboard
+      </button> -->
+      <button (click)="logout()">Logout</button>
+    </div>
+  </div>
+</div>
+</div>

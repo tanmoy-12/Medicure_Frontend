@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
 
-  //private apiUrl = 'http://localhost:3000/api/routes';
-  private apiUrl = 'https://medicure-backend-lm0h.onrender.com';
+  // private apiUrl = 'http://localhost:3000/medicure/routes';
+  private apiUrl = 'https://shared-server-cxer.onrender.com/medicure/routes';
   constructor(private http: HttpClient) {}
   //Add Plant Details
   addPlantDetails(data: any): Observable<any> {

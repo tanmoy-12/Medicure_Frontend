@@ -1,17 +1,15 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, inject } from '@angular/core';
-import { NavbarComponent } from '../navbar/navbar.component';
 import { FooterComponent } from '../footer/footer.component';
-import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { NgFor, NgIf } from '@angular/common';
-import { FormsModule, NgModel, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NotificationService } from '../services/notification.service';
-
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-doctor',
+  standalone: true,
   imports: [RouterLink, FooterComponent, NgIf, FormsModule, ReactiveFormsModule, NgFor],
   templateUrl: './doctor.component.html',
   styleUrl: './doctor.component.css',
@@ -22,6 +20,7 @@ export class DoctorComponent {
   isRegistrationCommpleted = true;
 
   doctorForm!: FormGroup;
+  doctorDetails: any[] = [];
   isSubmitting = false;
 
   //Get user email from localstorage
@@ -58,17 +57,27 @@ export class DoctorComponent {
       memberships: this.fb.array([this.fb.control('', Validators.required)]),
       researches: this.fb.array([this.fb.control('', Validators.required)]),
       languages: this.fb.array([this.fb.control('', Validators.required)]),
+      isRegistered: [true],
       isVerified: [false],
-      isRegistered: [true]
     });
   }
   ngOnInit(): void{
-    if(this.email)
-    this.authService.doctorRegistered(this.email).subscribe(
-      (res) => {
-        this.isRegistrationCommpleted = res.doctorRegistered;
+    if(this.email){
+      this.authService.doctorRegistered(this.email).subscribe(
+        (res) => {
+          this.isRegistrationCommpleted = res.doctorRegistered;
+        }
+      )
+      if(this.isRegistrationCommpleted){
+        this.authService.fetchDoctorDetails(this.email).subscribe(
+          (res) => {
+            this.doctorDetails = res.doctorDetails;
+            this.doctorForm.patchValue(this.doctorDetails);
+            console.log(this.doctorDetails);
+          }
+        )
       }
-    )
+    }
   }
   get formControls() {
     return this.doctorForm.controls;

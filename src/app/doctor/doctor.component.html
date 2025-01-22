@@ -189,10 +189,115 @@
         <button type="submit" [disabled]="doctorForm.invalid || isSubmitting">Submit</button>
       </form>
     </div>
-    <!-- <div class="title">
-      <p *ngIf="isRegistrationCommpleted">Shop Details</p>
-      <span *ngIf="shopDetails.isVerified"><i class="fa-solid fa-circle-check"></i>Verified</span>
-    </div> -->
+    <div class="title">
+      <p *ngIf="isRegistrationCommpleted">Profile Details</p>
+      <span *ngIf="doctorDetails.isVerified"><i class="fa-solid fa-circle-check"></i>Verified</span>
+    </div>
+    <div class="doctor-details-form" *ngIf="isRegistrationCommpleted">
+      <div class="doctor-details">
+        <span>Doctor Name</span>
+        <p>{{ doctorDetails.doctorName }}</p>
+      </div>
+      <div class="doctor-details">
+        <span>Registration Number</span>
+        <p>{{ doctorDetails.doctorRegistrationNumber }}</p>
+      </div>
+      <div class="doctor-details">
+        <span>Gender</span>
+        <p>{{ doctorDetails.gender }}</p>
+      </div>
+      <div class="doctor-details">
+        <span>Email</span>
+        <p>{{ doctorDetails.email }}</p>
+      </div>
+      <div class="doctor-details">
+        <span>Details</span>
+        <p>{{ doctorDetails.details }}</p>
+      </div>
+      <div class="doctor-details">
+        <span>Specialization</span>
+        <p>{{ doctorDetails.specialization }}</p>
+      </div>
+      <div class="doctor-details">
+        <span>Experience in Years</span>
+        <p>{{ doctorDetails.experienceInYears }}</p>
+      </div>
+      <div class="doctor-details" *ngFor="let exp of doctorDetails.experience">
+        <span>Experience</span>
+        <p>{{ exp }}</p>
+      </div>
+      <div class="doctor-details" *ngFor="let qual of doctorDetails.qualification">
+        <span>Qualification</span>
+        <p>{{ qual }}</p>
+      </div>
+      <div class="doctor-details">
+        <span>Clinic Name</span>
+        <p>{{ doctorDetails.clinicName }}</p>
+      </div>
+      <div class="doctor-details">
+        <span>Address</span>
+        <p>{{ doctorDetails.address }}</p>
+      </div>
+      <div class="doctor-details">
+        <span>City</span>
+        <p>{{ doctorDetails.city }}</p>
+      </div>
+      <div class="doctor-details">
+        <span>Available Morning (Start - End)</span>
+        <p>{{ doctorDetails.availableMorningStartingTime }} - {{ doctorDetails.availableMorningEndingTime }}</p>
+      </div>
+      <div class="doctor-details">
+        <span>Available Afternoon (Start - End)</span>
+        <p>{{ doctorDetails.availableAfternoonStartingTime }} - {{ doctorDetails.availableAfternoonEndingTime }}</p>
+      </div>
+      <div class="doctor-details">
+        <span>Available Evening (Start - End)</span>
+        <p>{{ doctorDetails.availableEveningStartingTime }} - {{ doctorDetails.availableEveningEndingTime }}</p>
+      </div>
+      <div class="doctor-details" *ngFor="let day of doctorDetails.availableDays">
+        <span>Available Day</span>
+        <p>{{ day }}</p>
+      </div>
+      <div class="doctor-details">
+        <span>Contact Number</span>
+        <p>{{ doctorDetails.contactNumber }}</p>
+      </div>
+      <div class="doctor-details" *ngFor="let achievement of doctorDetails.achievements">
+        <span>Achievement</span>
+        <p>{{ achievement }}</p>
+      </div>
+      <div class="doctor-details" *ngFor="let award of doctorDetails.awards">
+        <span>Award</span>
+        <p>{{ award }}</p>
+      </div>
+      <div class="doctor-details" *ngFor="let membership of doctorDetails.memberships">
+        <span>Membership</span>
+        <p>{{ membership }}</p>
+      </div>
+      <div class="doctor-details" *ngFor="let research of doctorDetails.researches">
+        <span>Research</span>
+        <p>{{ research }}</p>
+      </div>
+      <div class="doctor-details" *ngFor="let language of doctorDetails.languages">
+        <span>Language</span>
+        <p>{{ language }}</p>
+      </div>
+      <div class="doctor-details">
+        <span>Registered</span>
+        <p>{{ doctorDetails.isRegistered ? 'Yes' : 'No' }}</p>
+      </div>
+      <div class="doctor-details">
+        <span>Verified</span>
+        <p>{{ doctorDetails.isVerified ? 'Yes' : 'No' }}</p>
+      </div>
+    </div>
+    <div *ngIf="!doctorDetails.isVerified" class="info">
+      <i class="fa-solid fa-circle-exclamation"></i>
+      You cannot treat patients until the admin verifies your profile.
+    </div>
+    <div class="appointment-list" *ngIf="doctorDetails.isVerified">
+      <div class="tap">Today's Appointments</div>
+    </div>
   </div>
 </div>
 <app-footer></app-footer>

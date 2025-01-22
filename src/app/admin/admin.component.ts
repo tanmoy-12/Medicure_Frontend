@@ -21,9 +21,9 @@ export class AdminComponent {
   isAdmin = false;
 
   currentPage = 0;
-  totalShops = 0;
+  totalDoctors = 0;
   isLoading = false;
-  unverifiedShops: any[] = [];
+  unverifiedDoctors: any[] = [];
 
   //Get user email from localstorage
   email = localStorage.getItem('email');
@@ -36,15 +36,15 @@ export class AdminComponent {
 
 
   ngOnInit(): void {
-    this.loadUnverifiedShops();
+    this.loadUnverifiedDoctors();
   }
   //Fetch Unverified Shop  Details
-  loadUnverifiedShops() {
+  loadUnverifiedDoctors() {
     this.isLoading = true;
     this.authService.fetchUnverifiedDoctors(this.currentPage).subscribe(
       (res) => {
-        this.unverifiedShops = [...this.unverifiedShops, ...res.shops];
-        this.totalShops = res.total;
+        this.unverifiedDoctors = [...this.unverifiedDoctors, ...res.doctors];
+        this.totalDoctors = res.totalDoctors;
         this.isLoading = false;
       },
       (err) => {
@@ -55,9 +55,9 @@ export class AdminComponent {
   }
 
   loadMore() {
-    if (this.unverifiedShops.length < this.totalShops) {
+    if (this.unverifiedDoctors.length < this.totalDoctors) {
       this.currentPage++;
-      this.loadUnverifiedShops();
+      this.loadUnverifiedDoctors();
     }
   }
   verifyDetails(email: string){

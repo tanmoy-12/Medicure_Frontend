@@ -36,20 +36,19 @@
       <h4>Verify Shop Details</h4>
       <div class="verify-shops-list">
         <!-- Shop cards -->
-        <div class="shop-info" *ngFor="let shop of unverifiedShops">
+        <div class="shop-info" *ngFor="let doctor of unverifiedDoctors">
           <div class="s-details">
-            <h4>{{ shop.shopName }}</h4>
-            <p>{{ shop.address }}</p>
-            <p>Gst Number: {{ shop.gstNumber }}</p>
-            <p>Email: {{ shop.email }}</p>
-            <p>ShopType: {{ shop.shopType }}</p>
+            <h4>Name: {{ doctor.doctorName }}</h4>
+            <p>Doctor Address: {{ doctor.address }}</p>
+            <p>Registration Number: {{ doctor.doctorRegistrationNumber }}</p>
+            <p>Email: {{ doctor.email }}</p>
           </div>
           <div class="s-btn">
-            <button (click)="verifyDetails(shop.email)">Verify</button>
+            <button (click)="verifyDetails(doctor.email)">Verify</button>
           </div>
         </div>
         <div *ngIf="isLoading">Loading...</div>
-        <button *ngIf="unverifiedShops.length < totalShops && !isLoading" (click)="loadMore()" class="load-btn">Load More</button>
+        <button *ngIf="unverifiedDoctors.length < totalDoctors && !isLoading" (click)="loadMore()" class="load-btn">Load More</button>
       </div>
 
     </div>

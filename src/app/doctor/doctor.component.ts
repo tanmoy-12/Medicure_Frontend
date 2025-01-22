@@ -20,7 +20,6 @@ export class DoctorComponent {
   isRegistrationCommpleted = true;
 
   doctorForm!: FormGroup;
-  doctorDetails: any[] = [];
   isSubmitting = false;
 
   //Get user email from localstorage
@@ -61,6 +60,43 @@ export class DoctorComponent {
       isVerified: [false],
     });
   }
+
+  doctorDetails = {
+    email: '',
+    doctorName: '',
+    doctorRegistrationNumber: '',
+    gender: '',
+    details: '',
+    specialization: '',
+    experienceInYears: null,
+    experience: [],
+    qualification: [],
+    clinicName: '',
+    address: '',
+    city: '',
+    availableMorningStartingTime: '',
+    availableMorningEndingTime: '',
+    availableAfternoonStartingTime: '',
+    availableAfternoonEndingTime: '',
+    availableEveningStartingTime: '',
+    availableEveningEndingTime: '',
+    availableDays: [],
+    contactNumber: '',
+    achievements: [],
+    awards: [],
+    memberships: [],
+    researches: [],
+    languages: [],
+    isRegistered: false,
+    isVerified: false,
+  }
+  formatFieldName(field: string): string {
+    // Split camelCase and capitalize each word
+    return field
+      .replace(/([a-z])([A-Z])/g, '$1 $2') // Add space before uppercase letters
+      .replace(/^[a-z]/, (char) => char.toUpperCase()); // Capitalize the first letter
+  }
+
   ngOnInit(): void{
     if(this.email){
       this.authService.doctorRegistered(this.email).subscribe(

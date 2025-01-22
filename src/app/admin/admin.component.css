@@ -98,9 +98,16 @@ width: calc(100% - 240px);
   border-radius: 8px;
   max-height: 500px;
   overflow-y: auto;
+  background-color: #efefefde;
+  border: 1px solid #a5a5a5b4;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 .shop-info{
-  background-color: rgba(184, 209, 252, 0.813);
+  background-color: #ffffffcf;
+  box-shadow: 6px 6px 70px rgb(16 40 81 / 23%);
   display: flex;
   padding: 10px;
   border-radius: 4px;

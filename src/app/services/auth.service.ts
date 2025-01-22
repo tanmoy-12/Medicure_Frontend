@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
 
-  //private apiUrl = 'http://localhost:3000/medicure/routes';
+  // private apiUrl = 'http://localhost:3000/medicure/routes';
   private apiUrl = 'https://shared-server-cxer.onrender.com/medicure/routes';
   constructor(private http: HttpClient) {}
   // Send contact form
@@ -63,7 +63,7 @@ export class AuthService {
   }
   //Fetch Shops which are not verified
   fetchUnverifiedDoctors(page: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/fetch-unverified-shops?page=${page}`);
+    return this.http.get<any>(`${this.apiUrl}/fetch-unverified-doctors?page=${page}`);
   }
   //Verify Shop Details
   verifyDoctorDetails(email: string): Observable<any> {

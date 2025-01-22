@@ -25,9 +25,7 @@
         <button (click)="router.navigate(['/login'])" id="login" class="AuthButtons">Login/Register</button>
       </div>
       <div *ngIf="loggedIn">
-        <button (click)="router.navigate([isAdmin ? '/admin' : '/user'])" class="AuthButtons">
-          <i class="fa-solid fa-user"></i>&nbsp;Dashboard
-        </button>
+        <button (click)="navigate()" class="AuthButtons"><i class="fa-solid fa-user"></i>&nbsp;Dashboard</button>
         <button (click)="logout()" class="AuthButtons">Logout&nbsp;<i class="fa-solid fa-right-from-bracket"></i></button>
       </div>
     </div>
@@ -48,7 +46,7 @@
       <button (click)="router.navigate(['/login'])">Login&nbsp;<i class="fa-solid fa-right-to-bracket"></i></button>
     </div>
     <div *ngIf="loggedIn" class="userBtn">
-      <!-- <button (click)="router.navigate([isAdmin ? '/admin-dashboard' : '/user-dashboard'])">
+      <!-- <button (click)="navigate()">
         Dashboard
       </button> -->
       <button (click)="logout()">Logout</button>

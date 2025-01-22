@@ -61,5 +61,21 @@ export class AuthService {
   generateResponse(prompt: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/chatbot`, { prompt });
   }
+  //Fetch Shops which are not verified
+  fetchUnverifiedDoctors(page: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/fetch-unverified-shops?page=${page}`);
+  }
+  //Verify Shop Details
+  verifyDoctorDetails(email: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/verify-shop`, { email });
+  }
+  //Add new Doctor Details
+  addDoctorDetails(doctorDetails: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/register-doctor`, doctorDetails);
+  }
+  //To check if the doctor is already registered
+  doctorRegistered(email: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/doctor-registered`, { email });
+  }
 }
 

@@ -1,8 +1,5 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, inject } from '@angular/core';
-import { NavbarComponent } from '../navbar/navbar.component';
 import { FooterComponent } from '../footer/footer.component';
-import { HttpClient } from '@angular/common/http';
-import { Chart } from 'chart.js';
 import { AuthService } from '../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { NgFor,NgIf } from '@angular/common';

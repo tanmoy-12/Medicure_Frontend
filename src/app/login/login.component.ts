@@ -1,3 +1,4 @@
+import { FooterComponent } from './../footer/footer.component';
 import { Component, inject } from '@angular/core';
 import { NavbarComponent } from "../navbar/navbar.component";
 import { FormBuilder, Validators, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -5,8 +6,6 @@ import { Router } from '@angular/router';
 import { NotificationService } from '../services/notification.service';
 import { AuthService } from '../services/auth.service';
 import { NgClass, NgIf, NgFor } from '@angular/common';
-import { FooterComponent } from '../footer/footer.component';
-
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -14,7 +13,6 @@ import { FooterComponent } from '../footer/footer.component';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-
 export class LoginComponent {
   loading = false;
   otpSent = false;
@@ -22,8 +20,9 @@ export class LoginComponent {
   userName: string = '';
 
   roles=[
-    { value: 'student', name: 'User' },
-    { value: 'admin', name: 'Admin' }
+    { value: 'patient', name: 'Patient' },
+    { value: 'admin', name: 'Admin' },
+    { value: 'doctor', name: 'Doctor' }
   ]
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private notification: NotificationService) {
@@ -82,10 +81,15 @@ export class LoginComponent {
             if (res.isAdmin) {
               localStorage.setItem('token', res.token);
               localStorage.setItem('isAdmin', res.isAdmin.toString());
-              this.router.navigate(['/']);
-            } else {
+              this.router.navigate(['admin']);
+            }else if (res.isDoctor){
               localStorage.setItem('token', res.token);
-              this.router.navigate(['/']);
+              localStorage.setItem('isDoctor', res.isDoctor.toString());
+              this.router.navigate(['doctor']);
+            }
+            else {
+              localStorage.setItem('token', res.token);
+              this.router.navigate(['user']);
             }
 
             this.notification.showNotification(`${res.msg}`, 'success');

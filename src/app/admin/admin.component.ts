@@ -2,7 +2,6 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA, inject } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { FooterComponent } from '../footer/footer.component';
 import { HttpClient } from '@angular/common/http';
-import { Chart } from 'chart.js';
 import { AuthService } from '../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { NgFor,NgIf } from '@angular/common';
@@ -42,7 +41,7 @@ export class AdminComponent {
   //Fetch Unverified Shop  Details
   loadUnverifiedShops() {
     this.isLoading = true;
-    this.authService.fetchUnverifiedShops(this.currentPage).subscribe(
+    this.authService.fetchUnverifiedDoctors(this.currentPage).subscribe(
       (res) => {
         this.unverifiedShops = [...this.unverifiedShops, ...res.shops];
         this.totalShops = res.total;
@@ -63,7 +62,7 @@ export class AdminComponent {
   }
   verifyDetails(email: string){
     this.isLoading = true;
-    this.authService.verifyShopDetails(email).subscribe(
+    this.authService.verifyDoctorDetails(email).subscribe(
       (res) => {
         this.notification.showNotification(`${res.msg}`,'success');  // Show success message
         window.location.reload();

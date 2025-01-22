@@ -1,0 +1,198 @@
+<div class="main">
+  <div class="left-section">
+    <div class="logo">MediCure</div>
+    <div class="menu">
+      <li class="dashboard-active">
+        <img src="dashboard.png" alt="" width="20px" />&nbsp;&nbsp;
+        <p>Dashboard</p>
+      </li>
+      <a [routerLink]="['']"
+        ><li>
+          <i class="fa-solid fa-house"></i>&nbsp;&nbsp;
+          <p>Home</p>
+        </li></a
+      >
+      <li (click)="logout()">
+        <i class="fa-solid fa-power-off"></i>&nbsp;&nbsp;
+        <p>Log Out</p>
+      </li>
+    </div>
+    <hr />
+    <div class="contact-section">
+      <img
+        src="https://th.bing.com/th/id/R.a256ed4793f1500bb4376e15e969adc1?rik=M1h%2fBGLQuVWQrQ&riu=http%3a%2f%2fpluspng.com%2fimg-png%2fcartoon-kid-png-cartoon-person-exercising-1425.png&ehk=audsA1%2fWXcKbAN0UQX7K98tXHva%2bZG6DeuhFWrpLM2A%3d&risl=&pid=ImgRaw&r=0"
+        alt=""
+      />
+      <div class="contact-text">
+        <p>Need Help? Feel free to ask us</p>
+        <button (click)="goToSection('contact')">Contact Us</button>
+      </div>
+    </div>
+  </div>
+  <div class="right-section">
+    <div class="welcome">
+      <h3>Hi, {{ userName }}</h3>
+      <p>Welcome to your doctor dashboard!</p>
+    </div>
+    <div class="line"></div>
+    <div class="doctor-registration" *ngIf="!isRegistrationCommpleted">
+      <form [formGroup]="doctorForm" (ngSubmit)="onSubmit()" *ngIf="!isSubmitting" class="registrationForm">
+        <h2>Doctor Registration Form</h2>
+
+        <div class="form-group">
+          <label for="doctorName">Doctor Name</label>
+          <input id="doctorName" formControlName="doctorName" type="text" />
+        </div>
+
+        <div class="form-group">
+          <label for="doctorRegistrationNumber">Doctor Registration Number</label>
+          <input id="doctorRegistrationNumber" formControlName="doctorRegistrationNumber" type="text" />
+        </div>
+
+        <div class="form-group">
+          <label for="gender">Gender</label>
+          <select id="gender" formControlName="gender">
+            <option value="" disabled>Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="details">Details</label>
+          <textarea id="details" formControlName="details"></textarea>
+        </div>
+
+        <select name="specialization" id="specialization">
+          <option value="general_physician">General Physician</option>
+          <option value="cardiology">Cardiology</option>
+          <option value="neurology">Neurology</option>
+          <option value="gastroenterology">Gastroenterology</option>
+          <option value="orthopedic">Orthopedic</option>
+          <option value="oncology">Oncology</option>
+          <option value="gynecology">Gynecology</option>
+          <option value="dermatology">Dermatology</option>
+          <option value="ophthalmology">Ophthalmology</option>
+          <option value="pediatrics">Pediatrics</option>
+          <option value="endocrinology">Endocrinology</option>
+          <option value="urology">Urology</option>
+          <option value="nephrology">Nephrology</option>
+          <option value="pulmonology">Pulmonology</option>
+          <option value="rheumatology">Rheumatology</option>
+          <option value="neurosurgery">Neurosurgery</option>
+          <option value="radiology">Radiology</option>
+          <option value="plastic_surgery">Plastic Surgery</option>
+          <option value="neonatology">Neonatology</option>
+          <option value="vascular_surgery">Vascular Surgery</option>
+          <option value="psychiatry">Psychiatry</option>
+          <option value="dentistry">Dentistry</option>
+          <option value="ent">ENT (Ear, Nose, Throat)</option>
+        </select>
+
+
+        <div class="form-group">
+          <label for="experienceInYears">Experience (Years)</label>
+          <input id="experienceInYears" formControlName="experienceInYears" type="number" />
+        </div>
+
+        <div class="form-group" formArrayName="experience">
+          <label>Experience Details</label>
+          <div *ngFor="let exp of getFormArray('experience').controls; let i = index">
+            <input [formControlName]="i" type="text" />
+            <button type="button" (click)="removeField('experience', i)">Remove</button>
+          </div>
+          <button type="button" (click)="addField('experience')">Add Experience</button>
+        </div>
+
+        <div class="form-group" formArrayName="qualification">
+          <label>Qualification</label>
+          <div *ngFor="let qual of getFormArray('qualification').controls; let i = index">
+            <input [formControlName]="i" type="text" />
+            <button type="button" (click)="removeField('qualification', i)">Remove</button>
+          </div>
+          <button type="button" (click)="addField('qualification')">Add Qualification</button>
+        </div>
+
+        <div class="form-group">
+          <label for="clinicName">Clinic Name</label>
+          <input id="clinicName" formControlName="clinicName" type="text" />
+        </div>
+
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input id="address" formControlName="address" type="text" />
+        </div>
+
+        <div class="form-group">
+          <label for="city">City</label>
+          <input id="city" formControlName="city" type="text" />
+        </div>
+
+        <!-- Array fields start -->
+        <ng-container *ngFor="let field of ['achievements', 'awards', 'memberships', 'researches', 'languages']; let fieldName = index">
+          <div class="form-group" [formArrayName]="field">
+            <label>{{ field }}</label>
+            <div *ngFor="let item of getFormArray(field).controls; let i = index">
+              <input [formControlName]="i" type="text" />
+              <button type="button" (click)="removeField(field, i)">Remove</button>
+            </div>
+            <button type="button" (click)="addField(field)">Add {{ field }}</button>
+          </div>
+        </ng-container>
+        <!-- Array fields end -->
+
+        <div class="form-group" formArrayName="availableDays">
+          <label>Available Days</label>
+          <div *ngFor="let day of getFormArray('availableDays').controls; let i = index">
+            <input [formControlName]="i" type="text" />
+            <button type="button" (click)="removeField('availableDays', i)">Remove</button>
+          </div>
+          <button type="button" (click)="addField('availableDays')">Add Day</button>
+        </div>
+
+        <div class="form-group">
+          <label for="availableMorningStartingTime">Morning Start Time</label>
+          <input id="availableMorningStartingTime" formControlName="availableMorningStartingTime" type="time" />
+        </div>
+
+        <div class="form-group">
+          <label for="availableMorningEndingTime">Morning End Time</label>
+          <input id="availableMorningEndingTime" formControlName="availableMorningEndingTime" type="time" />
+        </div>
+
+        <div class="form-group">
+          <label for="availableAfternoonStartingTime">Afternoon Start Time</label>
+          <input id="availableAfternoonStartingTime" formControlName="availableAfternoonStartingTime" type="time" />
+        </div>
+
+        <div class="form-group">
+          <label for="availableAfternoonEndingTime">Afternoon End Time</label>
+          <input id="availableAfternoonEndingTime" formControlName="availableAfternoonEndingTime" type="time" />
+        </div>
+
+        <div class="form-group">
+          <label for="availableEveningStartingTime">Evening Start Time</label>
+          <input id="availableEveningStartingTime" formControlName="availableEveningStartingTime" type="time" />
+        </div>
+
+        <div class="form-group">
+          <label for="availableEveningEndingTime">Evening End Time</label>
+          <input id="availableEveningEndingTime" formControlName="availableEveningEndingTime" type="time" />
+        </div>
+
+        <div class="form-group">
+          <label for="contactNumber">Contact Number</label>
+          <input id="contactNumber" formControlName="contactNumber" type="text" placeholder="Enter 10-digit contact number" />
+        </div>
+
+        <button type="submit" [disabled]="doctorForm.invalid || isSubmitting">Submit</button>
+      </form>
+    </div>
+    <!-- <div class="title">
+      <p *ngIf="isRegistrationCommpleted">Shop Details</p>
+      <span *ngIf="shopDetails.isVerified"><i class="fa-solid fa-circle-check"></i>Verified</span>
+    </div> -->
+  </div>
+</div>
+<app-footer></app-footer>

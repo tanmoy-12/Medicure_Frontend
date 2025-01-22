@@ -7,7 +7,7 @@ import { NgClass, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
-  imports: [NgIf, RouterLink ],
+  imports: [NgIf ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
@@ -46,7 +46,17 @@ export class NavbarComponent {
     }
   }
 
-
+  navigate(){
+    if(localStorage.getItem('isAdmin')){
+      this.router.navigate(['/admin']);
+    }
+    else if(localStorage.getItem('isDoctor')){
+      this.router.navigate(['/doctor']);
+    }
+    else{
+      this.router.navigate(['/user']);
+    }
+  }
   logout() {
     const email = localStorage.getItem('email');
     if (email) {

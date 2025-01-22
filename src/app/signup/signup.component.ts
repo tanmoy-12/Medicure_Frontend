@@ -37,6 +37,7 @@ export class SignupComponent {
         Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[#@$!%*?&])[A-Za-z\\d#@$!%*?&].{8,16}$')
       ]],
       confirmPassword: ['', [Validators.required]],
+      userType: ['', [Validators.required]],
       otp: ['']
     }, { validator: this.passwordMatchValidator });
   }
@@ -52,7 +53,6 @@ export class SignupComponent {
     // Check if the signup form is valid
     if (this.signupForm.invalid) return;
 
-    console.log(this.signupForm.value)
     // Set loading to true before API call
     this.loading = true;
     // Call the signup method from the AuthService

@@ -14,6 +14,7 @@ import { FooterComponent } from '../footer/footer.component';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
+
 export class LoginComponent {
   loading = false;
   otpSent = false;

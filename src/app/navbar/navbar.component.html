@@ -1,7 +1,6 @@
 <nav>
   <a href="">
     <img src="logo.png" alt="" class="logo">
-    <span class="logo" [routerLink]="['']">MediCure</span>
   </a>
   <div class="search">
     <input
@@ -18,8 +17,8 @@
     </button>
   </div>
   <div class="menu">
-    <a (click)="goToSection('')"><p>Services</p></a>
-    <a (click)="goToSection('gallery')"><p>Plans</p></a>
+    <a (click)="goToSection('our-services')"><p>Services</p></a>
+    <a (click)="goToSection('plan')"><p>Plans</p></a>
 
     <div class="buttonContainer">
       <div *ngIf="!loggedIn">

@@ -7,7 +7,6 @@ nav{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px;
   padding-bottom: 0;
   width: 90%;
   max-width: 1800px;
@@ -19,7 +18,7 @@ nav{
       color: var(--dark);
       font-size: 28px;
       font-weight: 600;
-      max-width: 200px;
+      max-height: 50px;
       text-align: center;
   }
 }
@@ -73,6 +72,7 @@ border-right: 0.5px solid rgba(0, 0, 0, 0);
   a{
       list-style: none;
       text-decoration: none;
+      cursor: pointer;
       font-size: 18px;
       font-weight: 500 !important;
       color: var(--dark);

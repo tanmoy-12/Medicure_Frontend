@@ -1,0 +1,132 @@
+/**********Main Content********/
+.main{
+  min-height: 100vh;
+  background-color: var(--light);
+  display: flex;
+  font-family: 'Poppins', sans-serif;
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+.logo{
+  font-size: 25px;
+  font-weight: 600;
+  margin: 20px;
+  margin-bottom: 30px;
+}
+/*******Menu Section*********/
+.left-section{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 240px;
+  background-color: rgba(205, 240, 255, 0.813);
+}
+.menu{
+  display: flex;
+  flex-direction: column;
+  padding: 18px;
+}
+.menu li{
+  display: flex;
+  text-align: left;
+  white-space: nowrap;
+  font-size: larger;
+  font-weight: 500;
+  color: var(--dark);
+  cursor: pointer;
+}
+.left-section hr{
+  width: 100%;
+  background-color: rgb(231, 231, 231);
+  height: 2px;
+}
+.contact-section{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: relative;
+  margin-top: 50px;
+  padding: 90px 0;
+}
+.contact-section img{
+  width: 120px;
+  position: absolute;
+  left: 0;
+}
+.contact-text{
+  height: max-content;
+  background-color: bisque;
+  padding: 4px;
+  width: 150px;
+  z-index: 2;
+  button{
+      border: none;
+      outline: none;
+      border-radius: 9999px;
+      padding: 5px 10px;
+      background-color: #16331b;
+      color: var(--light);
+      font-weight: 600;
+  }
+}
+.dashboard-active{
+  background-color: #00000018;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 8px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  p{
+    margin-bottom: 0;
+  }
+}
+/**************Dashboard Section************/
+.right-section{
+width: calc(100% - 240px);
+  padding: 16px;
+}
+.line{
+  height: 2px;
+  border-radius: 6px;
+  margin: 18px auto;
+  background-color: #16331b;
+}
+.verify-shops-list{
+  border-radius: 8px;
+  max-height: 500px;
+  overflow-y: auto;
+}
+.shop-info{
+  background-color: rgba(184, 209, 252, 0.813);
+  display: flex;
+  padding: 10px;
+  border-radius: 4px;
+  p{
+    margin: 0;
+  }
+}
+.s-details{
+  width: 100%;
+}
+.s-btn button{
+  background-color: #119300;
+  border-radius: 4px;
+  color: var(--light);
+  font-size: larger;
+  font-weight: 600;
+  border: none;
+  padding: 6px 18px;
+}
+.load-btn{
+  margin-top: 20px;
+  background-color: transparent;
+  color: #001604;
+  font-weight: 600;
+  border: none;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}

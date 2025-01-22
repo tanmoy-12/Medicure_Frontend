@@ -1,0 +1,58 @@
+<div class="main">
+  <div class="left-section">
+    <div class="logo">E-Bazaar</div>
+    <div class="menu">
+      <li class="dashboard-active">
+        <img src="dashboard.png" alt="" width="20px" />&nbsp;&nbsp;
+        <p>Dashboard</p>
+      </li>
+      <a [routerLink]="['']"
+        ><li>
+          <i class="fa-solid fa-house"></i>&nbsp;&nbsp;
+          <p>Home</p>
+        </li></a
+      >
+      <li (click)="logout()">
+        <i class="fa-solid fa-power-off"></i>&nbsp;&nbsp;
+        <p>Log Out</p>
+      </li>
+    </div>
+    <hr />
+    <!-- <div class="contact-section">
+      <img src="https://th.bing.com/th/id/R.a256ed4793f1500bb4376e15e969adc1?rik=M1h%2fBGLQuVWQrQ&riu=http%3a%2f%2fpluspng.com%2fimg-png%2fcartoon-kid-png-cartoon-person-exercising-1425.png&ehk=audsA1%2fWXcKbAN0UQX7K98tXHva%2bZG6DeuhFWrpLM2A%3d&risl=&pid=ImgRaw&r=0" alt="">
+      <div class="contact-text">
+        <p>Need Help? Feel free to ask expert</p>
+        <button (click)="goToSection('contact')">Contact Us</button>
+      </div>
+    </div> -->
+  </div>
+  <div class="right-section">
+    <div class="welcome">
+      <h3>Hi, {{ userName }}</h3>
+      <p>Welcome to your admin dashboard!</p>
+    </div>
+    <div class="line"></div>
+    <div class="verify-shops">
+      <h4>Verify Shop Details</h4>
+      <div class="verify-shops-list">
+        <!-- Shop cards -->
+        <div class="shop-info" *ngFor="let shop of unverifiedShops">
+          <div class="s-details">
+            <h4>{{ shop.shopName }}</h4>
+            <p>{{ shop.address }}</p>
+            <p>Gst Number: {{ shop.gstNumber }}</p>
+            <p>Email: {{ shop.email }}</p>
+            <p>ShopType: {{ shop.shopType }}</p>
+          </div>
+          <div class="s-btn">
+            <button (click)="verifyDetails(shop.email)">Verify</button>
+          </div>
+        </div>
+        <div *ngIf="isLoading">Loading...</div>
+        <button *ngIf="unverifiedShops.length < totalShops && !isLoading" (click)="loadMore()" class="load-btn">Load More</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

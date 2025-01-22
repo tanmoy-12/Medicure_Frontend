@@ -71,7 +71,7 @@ export class DoctorComponent {
       if(this.isRegistrationCommpleted){
         this.authService.fetchDoctorDetails(this.email).subscribe(
           (res) => {
-            this.doctorDetails = res.doctorDetails;
+            this.doctorDetails = res.doctor;
             this.doctorForm.patchValue(this.doctorDetails);
             console.log(this.doctorDetails);
           }

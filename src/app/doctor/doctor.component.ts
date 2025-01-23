@@ -246,7 +246,7 @@ export class DoctorComponent {
       this.authService.addDoctorDetails(formData).subscribe({
         next: (res) => {
           this.isSubmitting = false;
-          this.router.navigate(['/doctor']);
+          window.location.reload();
           this.notification.showNotification('Doctor details updated successfully!', 'success');
         },
         error: (err) => {

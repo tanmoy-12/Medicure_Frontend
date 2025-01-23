@@ -11,8 +11,8 @@ export class AuthService {
   private apiUrl = 'https://shared-server-cxer.onrender.com/medicure/routes';
   constructor(private http: HttpClient) {}
   // Send contact form
-  sendContactForm(formValues: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/contact-form`, formValues);
+  sendMessageForm(name: String, email: String, message: String): Observable<any> {
+    return this.http.post(`${this.apiUrl}/contact-form`, { name, email, message });
   }
   // Signup form
   signup(data: any): Observable<any> {

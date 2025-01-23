@@ -152,36 +152,6 @@
         </div>
 
         <div class="form-group">
-          <label for="availableMorningStartingTime">Morning Start Time</label>
-          <input id="availableMorningStartingTime" formControlName="availableMorningStartingTime" type="time" />
-        </div>
-
-        <div class="form-group">
-          <label for="availableMorningEndingTime">Morning End Time</label>
-          <input id="availableMorningEndingTime" formControlName="availableMorningEndingTime" type="time" />
-        </div>
-
-        <div class="form-group">
-          <label for="availableAfternoonStartingTime">Afternoon Start Time</label>
-          <input id="availableAfternoonStartingTime" formControlName="availableAfternoonStartingTime" type="time" />
-        </div>
-
-        <div class="form-group">
-          <label for="availableAfternoonEndingTime">Afternoon End Time</label>
-          <input id="availableAfternoonEndingTime" formControlName="availableAfternoonEndingTime" type="time" />
-        </div>
-
-        <div class="form-group">
-          <label for="availableEveningStartingTime">Evening Start Time</label>
-          <input id="availableEveningStartingTime" formControlName="availableEveningStartingTime" type="time" />
-        </div>
-
-        <div class="form-group">
-          <label for="availableEveningEndingTime">Evening End Time</label>
-          <input id="availableEveningEndingTime" formControlName="availableEveningEndingTime" type="time" />
-        </div>
-
-        <div class="form-group">
           <label for="contactNumber">Contact Number</label>
           <input id="contactNumber" formControlName="contactNumber" type="text" placeholder="Enter 10-digit contact number" />
         </div>
@@ -242,18 +212,6 @@
         <span>City</span>
         <p>{{ doctorDetails.city }}</p>
       </div>
-      <div class="doctor-details">
-        <span>Available Morning (Start - End)</span>
-        <p>{{ doctorDetails.availableMorningStartingTime }} - {{ doctorDetails.availableMorningEndingTime }}</p>
-      </div>
-      <div class="doctor-details">
-        <span>Available Afternoon (Start - End)</span>
-        <p>{{ doctorDetails.availableAfternoonStartingTime }} - {{ doctorDetails.availableAfternoonEndingTime }}</p>
-      </div>
-      <div class="doctor-details">
-        <span>Available Evening (Start - End)</span>
-        <p>{{ doctorDetails.availableEveningStartingTime }} - {{ doctorDetails.availableEveningEndingTime }}</p>
-      </div>
       <div class="doctor-details" *ngFor="let day of doctorDetails.availableDays">
         <span>Available Day</span>
         <p>{{ day }}</p>
@@ -295,8 +253,60 @@
       <i class="fa-solid fa-circle-exclamation"></i>
       You cannot treat patients until the admin verifies your profile.
     </div>
+    <div class="time-slots" *ngIf="doctorDetails.isVerified && doctorDetails.todayNotAvailable || doctorDetails.slots.length == 0">
+      <h4>Set Availability</h4>
+
+      <!-- Starting Time -->
+      <label for="startingTime">Starting Time:</label>
+      <input type="time" [(ngModel)]="startingTime" id="startingTime" />
+
+      <!-- Ending Time -->
+      <label for="endingTime">Ending Time:</label>
+      <input type="time" [(ngModel)]="endingTime" id="endingTime" />
+
+      <button (click)="generateTimeSlots()">Generate Time Slots</button>
+
+      <div *ngIf="timeSlots.length > 0">
+        <h4>Available Time Slots</h4>
+        <div *ngFor="let slot of timeSlots" class="time-slot">
+          <input
+            type="checkbox"
+            [id]="slot.time"
+            [(ngModel)]="slot.available"
+          />
+          <label [for]="slot.time">{{ slot.time }}</label>
+        </div>
+      </div>
+      <button (click)="saveSlots()">Save Slots</button>
+    </div>
+    <!--Show All the Time Slots-->
+    <div *ngIf="!doctorDetails.todayNotAvailable || doctorDetails.slots.length > 0" class="time-slot-container">
+      <h4 class="tap">Available Time Slots</h4>
+      <div class="time-slots">
+        <div *ngFor="let slot of doctorDetails.slots" class="time-slot">
+          <input
+            type="checkbox"
+            [id]="slot.time"
+            [(ngModel)]="slot.available"
+            (change)="onSlotChange(slot)"
+          />
+          <label [for]="slot.time">{{ slot.time }}</label>
+        </div>
+      </div>
+      <div *ngIf="hasChanges">
+        <button (click)="saveEdits()">Save Edits</button>
+        <button (click)="discardEdits()">Discard</button>
+      </div>
+    </div>
+
     <div class="appointment-list" *ngIf="doctorDetails.isVerified">
       <div class="tap">Today's Appointments</div>
+      <div *ngIf="doctorDetails.slots.length == 0">
+        No appointments found.
+      </div>
+      <div *ngFor="let appointment of appointments">
+        <p *ngIf="appointment.occupied == true">{{ appointment.time}} {{ appointment.patientName}} {{ appointment.patientMail }}</p>
+      </div>
     </div>
   </div>
 </div>

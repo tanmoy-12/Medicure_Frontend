@@ -67,7 +67,7 @@ export class AuthService {
   }
   //Verify Shop Details
   verifyDoctorDetails(email: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/verify-shop`, { email });
+    return this.http.post<any>(`${this.apiUrl}/verify-doctor`, { email });
   }
   //Add new Doctor Details
   addDoctorDetails(doctorDetails: any): Observable<any> {
@@ -80,6 +80,30 @@ export class AuthService {
   //Fetch Doctor Details by email
   fetchDoctorDetails(email: string): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/fetch-doctor-details`, { email });
+  }
+  //Fetch Doctor details by filtering specialization, city, language & gender
+  fetchFilteredDoctorDetails(filters: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/fetch-filtered-doctor-details`, filters); // Send filters directly
+  }
+  //Assign Time Slots
+  assignTimeSlots(doctorId: string, slots: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/save-time-slots`, { doctorId, slots });
+  }
+  //Edit Time Slots
+  updateSlots(doctorId: string, slots: any[]): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/update-slots`, { doctorId, slots });
+  }
+  //Find UnOccupied Slots
+  findUnoccupiedSlots(email: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/find-doctor-with-unoccupied-slots`, { email });
+  }
+  //Book Appointment
+  bookAppointment(doctorId: String, slotId: String, email: String, userName: String): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/book-appointment`, { doctorId, slotId, email, userName });
+  }
+  //Find appointments
+  findAppointments(doctorId: String): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/find-appointments`, { doctorId });
   }
 }
 

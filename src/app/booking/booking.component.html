@@ -1,0 +1,193 @@
+<div class="navbar">
+  <app-navbar></app-navbar>
+</div>
+
+<div class="main">
+  <div class="left-section">
+    <h4>Filters</h4>
+
+    <!-- City Filter -->
+    <div class="filter">
+      <div class="form-title" (click)="toggleCheck(cityChecked, 'cityChecked')">
+        City<i class="fa-solid fa-angle-down"></i>
+      </div>
+      <div class="form-content" *ngIf="cityChecked">
+        <div *ngFor="let item of city" class="form-item">
+          <input
+            type="radio"
+            [id]="'city-' + item.name"
+            name="city"
+            (change)="updateFilter('city', item.name)"
+          />
+          <label [for]="'city-' + item.name">{{ item.name }}</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Specialization Filter -->
+    <div class="filter">
+      <div
+        class="form-title"
+        (click)="toggleCheck(specialityChecked, 'specialityChecked')"
+      >
+        Specialization<i class="fa-solid fa-angle-down"></i>
+      </div>
+      <div class="form-content" *ngIf="specialityChecked">
+        <div *ngFor="let item of specialities" class="form-item">
+          <input
+            type="radio"
+            [id]="'speciality-' + item.value"
+            name="specialization"
+            (change)="updateFilter('specialization', item.value)"
+          />
+          <label [for]="'speciality-' + item.name">{{ item.name }}</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Language Filter -->
+    <div class="filter">
+      <div
+        class="form-title"
+        (click)="toggleCheck(languageChecked, 'languageChecked')"
+      >
+        Language <i class="fa-solid fa-angle-down"></i>
+      </div>
+      <div class="form-content" *ngIf="languageChecked">
+        <div *ngFor="let item of languages" class="form-item">
+          <input
+            type="radio"
+            [id]="'language-' + item.name"
+            name="language"
+            (change)="updateFilter('language', item.name)"
+          />
+          <label [for]="'language-' + item.name">{{ item.name }}</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gender Filter -->
+    <div class="filter">
+      <div
+        class="form-title"
+        (click)="toggleCheck(genderChecked, 'genderChecked')"
+      >
+        Gender <i class="fa-solid fa-angle-down"></i>
+      </div>
+      <div class="form-content" *ngIf="genderChecked">
+        <div *ngFor="let item of genders" class="form-item">
+          <input
+            type="radio"
+            [id]="'gender-' + item.name"
+            name="gender"
+            (change)="updateFilter('gender', item.name)"
+          />
+          <label [for]="'gender-' + item.name">{{ item.name }}</label>
+        </div>
+      </div>
+    </div>
+
+    <button class="clear" (click)="clearFilters()">Clear Filters</button>
+  </div>
+
+  <div class="right-section">
+    <h4>Available Doctors in India</h4>
+    <div *ngIf="doctors.length === 0" class="no-doctors">
+      No doctors available.
+    </div>
+    <div *ngFor="let doctor of doctors" class="doctor-card">
+      <div class="doctor-image">
+        <img
+          *ngIf="doctor.gender === 'Male'"
+          src="https://cdn0.iconfinder.com/data/icons/activities-flat-colorful/2048/2131_-_Doctor-512.png"
+          alt="Doctor's Image"
+        />
+        <img
+          *ngIf="doctor.gender === 'Female'"
+          src="https://www.pngmart.com/files/21/Female-Doctor-PNG-HD-Isolated.png"
+          alt="Doctor's Image"
+        />
+      </div>
+      <div class="doctor-details">
+        <h5>{{ doctor.doctorName }}</h5>
+        <p class="experience">
+          {{ doctor.experienceInYears }}+ years Experience
+        </p>
+        <p>{{ getUpperCaseSpecialization(doctor.specialization) }}</p>
+        <p class="qualification">{{ doctor.qualification.join(", ") }}</p>
+        <p class="location">
+          <i class="fa-solid fa-location-dot"></i>&nbsp;{{ doctor.clinicName }},
+          {{ doctor.city }}
+        </p>
+        <p>Language: {{ doctor.languages.join(", ") }}</p>
+      </div>
+      <div class="doctor-appointment">
+        <p class="availableDays">{{ doctor.availableDays.join(" - ") }}</p>
+        <button
+          class="bookAppointment"
+          (click)="bookAppointmentToggle(doctor.email)"
+        >
+          Book Appointment
+        </button>
+      </div>
+    </div>
+    <div class="appointment-card" *ngIf="isappointmentCard">
+      <div class="appointment-card-contents">
+        <h5 class="tap">Book Appointement</h5>
+        <div class="appointment">
+          <div class="appointment-image">
+            <img
+              *ngIf="doctorAppointment.gender === 'Male'"
+              src="https://cdn0.iconfinder.com/data/icons/activities-flat-colorful/2048/2131_-_Doctor-512.png"
+              alt="Doctor's Image"
+            />
+            <img
+              *ngIf="doctorAppointment.gender === 'Female'"
+              src="https://www.pngmart.com/files/21/Female-Doctor-PNG-HD-Isolated.png"
+              alt="Doctor's Image"
+            />
+            <h5>{{ doctorAppointment.doctorName }}</h5>
+            <p>
+              {{ getUpperCaseSpecialization(doctorAppointment.specialization) }}
+            </p>
+          </div>
+          <div class="appointmentright">
+            <p>Available Slots</p>
+            <div class="slots">
+              <div
+                *ngFor="let slot of doctorAppointment.slots"
+                class="slot"
+                [class.selected]="selectedSlotId === slot._id"
+                (click)="selectSlot(slot._id)"
+              >
+                <p>{{ slot.time }}</p>
+                <div class="ticker" *ngIf="selectedSlotId === slot._id">
+                  <i class="fa fa-check tick"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="apbtns">
+          <button
+            class="cancel"
+            id="cancel"
+            (click)="bookAppointmentToggle(doctorAppointment.email)"
+          >
+            Cancel
+          </button>
+          <button
+            class="book"
+            id="bookApp"
+            [disabled]="!selectedSlotId"
+            (click)="bookAppointment(doctorAppointment._id)"
+          >
+            <i class="fa-regular fa-calendar-check"></i>&nbsp;Book Appointment
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

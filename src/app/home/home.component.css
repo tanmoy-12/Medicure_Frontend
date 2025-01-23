@@ -1033,6 +1033,7 @@ input{
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
   box-shadow: 6px 6px 70px rgb(16 40 81 / 23%);
   i{
     font-size: 42px;

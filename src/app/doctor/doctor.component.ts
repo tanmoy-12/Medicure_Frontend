@@ -3,14 +3,14 @@ import { FooterComponent } from '../footer/footer.component';
 import { AuthService } from '../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { NgFor, NgIf } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, NgModel, ReactiveFormsModule } from '@angular/forms';
 import { NotificationService } from '../services/notification.service';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-doctor',
   standalone: true,
-  imports: [RouterLink, FooterComponent, NgIf, FormsModule, ReactiveFormsModule, NgFor],
+  imports: [RouterLink, FooterComponent, NgIf, FormsModule, ReactiveFormsModule, NgFor, FormsModule],
   templateUrl: './doctor.component.html',
   styleUrl: './doctor.component.css',
 })
@@ -25,6 +25,12 @@ export class DoctorComponent {
   //Get user email from localstorage
   email = localStorage.getItem('email');
   userName = localStorage.getItem('userName');
+
+  startingTime: string = '';
+  endingTime: string = '';
+  timeSlots: { time: string; available: boolean }[] = [];
+  originalSlots: any[] = [];
+  hasChanges = false;
 
   private authService = inject(AuthService);
   private router = inject(Router);
@@ -43,12 +49,6 @@ export class DoctorComponent {
       clinicName: ['', Validators.required],
       address: ['', Validators.required],
       city: ['', Validators.required],
-      availableMorningStartingTime: ['', Validators.required],
-      availableMorningEndingTime: ['', Validators.required],
-      availableAfternoonStartingTime: ['', Validators.required],
-      availableAfternoonEndingTime: ['', Validators.required],
-      availableEveningStartingTime: ['', Validators.required],
-      availableEveningEndingTime: ['', Validators.required],
       availableDays: this.fb.array([this.fb.control('', Validators.required)]),
       contactNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
       achievements: this.fb.array([this.fb.control('', Validators.required)]),
@@ -62,6 +62,7 @@ export class DoctorComponent {
   }
 
   doctorDetails = {
+    _id: '',
     email: '',
     doctorName: '',
     doctorRegistrationNumber: '',
@@ -74,12 +75,10 @@ export class DoctorComponent {
     clinicName: '',
     address: '',
     city: '',
-    availableMorningStartingTime: '',
-    availableMorningEndingTime: '',
-    availableAfternoonStartingTime: '',
-    availableAfternoonEndingTime: '',
-    availableEveningStartingTime: '',
-    availableEveningEndingTime: '',
+    todayNotAvailable: false,
+    slots: [
+      {time: '', available: true, patientName: '', patientMail: '', occupied: false}
+    ],
     availableDays: [],
     contactNumber: '',
     achievements: [],
@@ -89,6 +88,45 @@ export class DoctorComponent {
     languages: [],
     isRegistered: false,
     isVerified: false,
+  }
+  appointments = [
+    {time: '', available: true, patientName: '', patientMail: '', occupied: false}
+  ]
+    generateTimeSlots() {
+    if (!this.startingTime || !this.endingTime) {
+      alert('Please select both starting and ending times');
+      return;
+    }
+
+    const start = new Date(`1970-01-01T${this.startingTime}:00`);
+    const end = new Date(`1970-01-01T${this.endingTime}:00`);
+    this.timeSlots = [];
+
+    while (start < end) {
+      const slotStart = new Date(start);
+      start.setMinutes(start.getMinutes() + 30);
+      const slotEnd = new Date(start);
+
+      this.timeSlots.push({
+        time: `${slotStart.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - ${slotEnd.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`,
+        available: true,
+      });
+    }
+  }
+
+  saveSlots() {
+    const data = { slots: this.timeSlots };
+    console.log(data);
+    if(this.email){
+      this.authService.assignTimeSlots(this.doctorDetails._id, data).subscribe(
+        (response) => {
+          alert('Slots saved successfully!');
+        },
+        (error) => {
+          console.error('Error saving slots:', error);
+        }
+      );
+    }
   }
   formatFieldName(field: string): string {
     // Split camelCase and capitalize each word
@@ -109,16 +147,50 @@ export class DoctorComponent {
           (res) => {
             this.doctorDetails = res.doctor;
             this.doctorForm.patchValue(this.doctorDetails);
-            console.log(this.doctorDetails);
+            this.fetchAppointments(this.doctorDetails._id)
           }
         )
+      }
+      if(!this.doctorDetails.todayNotAvailable){
+        this.originalSlots = JSON.parse(JSON.stringify(this.doctorDetails.slots));
       }
     }
   }
   get formControls() {
     return this.doctorForm.controls;
   }
+  onSlotChange(slot: any) {
+    this.hasChanges = true; // Mark that changes have been made
+  }
 
+  saveEdits() {
+    const editedSlots = this.doctorDetails.slots.map((slot: any) => {
+      if (!slot.available && slot.patientMail) {
+        slot.patientName = null;
+        slot.patientMail = null;
+      }
+      return slot;
+    });
+
+    this.authService.updateSlots(this.doctorDetails._id, editedSlots).subscribe(
+      (response) => {
+        this.notification.showNotification('Slots updated successfully!', 'success');
+        this.hasChanges = false;
+        this.originalSlots = JSON.parse(
+          JSON.stringify(this.doctorDetails.slots)
+        );
+      },
+      (error) => {
+        console.error('Error updating slots:', error);
+      }
+    );
+  }
+
+  discardEdits() {
+    this.doctorDetails.slots = JSON.parse(JSON.stringify(this.originalSlots));
+    this.hasChanges = false;
+    window.location.reload()
+  }
   getFormArray(field: string): FormArray {
     return this.doctorForm.get(field) as FormArray;
   }
@@ -134,7 +206,17 @@ export class DoctorComponent {
     const formArray = this.getFormArray(field);
     formArray.removeAt(index);
   }
-
+  fetchAppointments(doctorId: string): void {
+    this.authService.findAppointments(doctorId).subscribe(
+      (response) => {
+        console.log(response.appointments)
+        this.appointments = response.appointments;
+      },
+      (error) => {
+        console.error('Error fetching appointments:', error);
+      }
+    );
+  }
   onSubmit(): void {
     if (this.doctorForm.valid && this.email) {
       this.isSubmitting = true;

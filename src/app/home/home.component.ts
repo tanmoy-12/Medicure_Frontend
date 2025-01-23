@@ -1,15 +1,19 @@
 import { Component } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { FooterComponent } from "../footer/footer.component";
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  imports: [NavbarComponent, FooterComponent, RouterLink],
+  standalone: true,
+  imports: [NavbarComponent, FooterComponent, RouterLink, RouterModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
+  constructor(
+    public router: Router,
+  ){}
   currentIndex: number = 0;
   translateX: string = 'translateX(0px)';
   readonly slideWidth: number = 350; // Slide width matches `.slider-item` width in CSS.

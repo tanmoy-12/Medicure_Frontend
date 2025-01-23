@@ -9,7 +9,7 @@ import { NotificationService } from '../services/notification.service';
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [FooterComponent,NgFor, NgIf,FormsModule, RouterLink],
+  imports: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css'

@@ -64,7 +64,6 @@ export class SignupComponent {
           this.notification.showNotification(res.msg, 'error');
           return;
         }
-
         // OTP sent successfully
         this.loading = false;
         this.otpSent = true;
@@ -85,7 +84,7 @@ export class SignupComponent {
       (res) => {
         // OTP verified successfully, navigate to login
         this.loading = false;
-        this.router.navigate(['/login']);
+        this.router.navigate(['login']);
         this.notification.showNotification(res.msg, 'success');
       },
       (err) => {

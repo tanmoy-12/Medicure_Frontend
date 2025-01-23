@@ -18,13 +18,6 @@
       </li>
     </div>
     <hr />
-    <!-- <div class="contact-section">
-      <img src="https://th.bing.com/th/id/R.a256ed4793f1500bb4376e15e969adc1?rik=M1h%2fBGLQuVWQrQ&riu=http%3a%2f%2fpluspng.com%2fimg-png%2fcartoon-kid-png-cartoon-person-exercising-1425.png&ehk=audsA1%2fWXcKbAN0UQX7K98tXHva%2bZG6DeuhFWrpLM2A%3d&risl=&pid=ImgRaw&r=0" alt="">
-      <div class="contact-text">
-        <p>Need Help? Feel free to ask expert</p>
-        <button (click)="goToSection('contact')">Contact Us</button>
-      </div>
-    </div> -->
   </div>
   <div class="right-section">
     <div class="welcome">
@@ -50,7 +43,6 @@
         <div *ngIf="isLoading">Loading...</div>
         <button *ngIf="unverifiedDoctors.length < totalDoctors && !isLoading" (click)="loadMore()" class="load-btn">Load More</button>
       </div>
-
     </div>
   </div>
 </div>

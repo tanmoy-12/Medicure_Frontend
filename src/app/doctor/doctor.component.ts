@@ -227,10 +227,7 @@ export class DoctorComponent {
       const requiredKeys = [
         'doctorName', 'doctorRegistrationNumber', 'gender', 'details',
         'specialization', 'experienceInYears', 'experience', 'qualification',
-        'clinicName', 'address', 'city', 'availableMorningStartingTime',
-        'availableMorningEndingTime', 'availableAfternoonStartingTime',
-        'availableAfternoonEndingTime', 'availableEveningStartingTime',
-        'availableEveningEndingTime', 'availableDays', 'contactNumber',
+        'clinicName', 'address', 'city', 'availableDays', 'contactNumber',
         'achievements', 'awards', 'memberships', 'researches', 'languages',
         'isVerified', 'isRegistered', 'email'
       ];

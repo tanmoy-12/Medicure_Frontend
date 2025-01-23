@@ -36,7 +36,12 @@
     </div>
     <div class="line"></div>
     <div class="doctor-registration" *ngIf="!isRegistrationCommpleted">
-      <form [formGroup]="doctorForm" (ngSubmit)="onSubmit()" *ngIf="!isSubmitting" class="registrationForm">
+      <form
+        [formGroup]="doctorForm"
+        (ngSubmit)="onSubmit()"
+        *ngIf="!isSubmitting"
+        class="registrationForm"
+      >
         <h2>Doctor Registration Form</h2>
 
         <div class="form-group">
@@ -45,8 +50,14 @@
         </div>
 
         <div class="form-group">
-          <label for="doctorRegistrationNumber">Doctor Registration Number</label>
-          <input id="doctorRegistrationNumber" formControlName="doctorRegistrationNumber" type="text" />
+          <label for="doctorRegistrationNumber"
+            >Doctor Registration Number</label
+          >
+          <input
+            id="doctorRegistrationNumber"
+            formControlName="doctorRegistrationNumber"
+            type="text"
+          />
         </div>
 
         <div class="form-group">
@@ -90,28 +101,49 @@
           <option value="ent">ENT (Ear, Nose, Throat)</option>
         </select>
 
-
         <div class="form-group">
           <label for="experienceInYears">Experience (Years)</label>
-          <input id="experienceInYears" formControlName="experienceInYears" type="number" />
+          <input
+            id="experienceInYears"
+            formControlName="experienceInYears"
+            type="number"
+          />
         </div>
 
         <div class="form-group" formArrayName="experience">
           <label>Experience Details</label>
-          <div *ngFor="let exp of getFormArray('experience').controls; let i = index">
+          <div
+            *ngFor="
+              let exp of getFormArray('experience').controls;
+              let i = index
+            "
+          >
             <input [formControlName]="i" type="text" />
-            <button type="button" (click)="removeField('experience', i)">Remove</button>
+            <button type="button" (click)="removeField('experience', i)">
+              Remove
+            </button>
           </div>
-          <button type="button" (click)="addField('experience')">Add Experience</button>
+          <button type="button" (click)="addField('experience')">
+            Add Experience
+          </button>
         </div>
 
         <div class="form-group" formArrayName="qualification">
           <label>Qualification</label>
-          <div *ngFor="let qual of getFormArray('qualification').controls; let i = index">
+          <div
+            *ngFor="
+              let qual of getFormArray('qualification').controls;
+              let i = index
+            "
+          >
             <input [formControlName]="i" type="text" />
-            <button type="button" (click)="removeField('qualification', i)">Remove</button>
+            <button type="button" (click)="removeField('qualification', i)">
+              Remove
+            </button>
           </div>
-          <button type="button" (click)="addField('qualification')">Add Qualification</button>
+          <button type="button" (click)="addField('qualification')">
+            Add Qualification
+          </button>
         </div>
 
         <div class="form-group">
@@ -130,38 +162,73 @@
         </div>
 
         <!-- Array fields start -->
-        <ng-container *ngFor="let field of ['achievements', 'awards', 'memberships', 'researches', 'languages']; let fieldName = index">
+        <ng-container
+          *ngFor="
+            let field of [
+              'achievements',
+              'awards',
+              'memberships',
+              'researches',
+              'languages'
+            ];
+            let fieldName = index
+          "
+        >
           <div class="form-group" [formArrayName]="field">
             <label>{{ field }}</label>
-            <div *ngFor="let item of getFormArray(field).controls; let i = index">
+            <div
+              *ngFor="let item of getFormArray(field).controls; let i = index"
+            >
               <input [formControlName]="i" type="text" />
-              <button type="button" (click)="removeField(field, i)">Remove</button>
+              <button type="button" (click)="removeField(field, i)">
+                Remove
+              </button>
             </div>
-            <button type="button" (click)="addField(field)">Add {{ field }}</button>
+            <button type="button" (click)="addField(field)">
+              Add {{ field }}
+            </button>
           </div>
         </ng-container>
         <!-- Array fields end -->
 
         <div class="form-group" formArrayName="availableDays">
           <label>Available Days</label>
-          <div *ngFor="let day of getFormArray('availableDays').controls; let i = index">
+          <div
+            *ngFor="
+              let day of getFormArray('availableDays').controls;
+              let i = index
+            "
+          >
             <input [formControlName]="i" type="text" />
-            <button type="button" (click)="removeField('availableDays', i)">Remove</button>
+            <button type="button" (click)="removeField('availableDays', i)">
+              Remove
+            </button>
           </div>
-          <button type="button" (click)="addField('availableDays')">Add Day</button>
+          <button type="button" (click)="addField('availableDays')">
+            Add Day
+          </button>
         </div>
 
         <div class="form-group">
           <label for="contactNumber">Contact Number</label>
-          <input id="contactNumber" formControlName="contactNumber" type="text" placeholder="Enter 10-digit contact number" />
+          <input
+            id="contactNumber"
+            formControlName="contactNumber"
+            type="text"
+            placeholder="Enter 10-digit contact number"
+          />
         </div>
 
-        <button type="submit" [disabled]="doctorForm.invalid || isSubmitting">Submit</button>
+        <button type="submit" [disabled]="doctorForm.invalid || isSubmitting">
+          Submit
+        </button>
       </form>
     </div>
     <div class="title">
       <p *ngIf="isRegistrationCommpleted">Profile Details</p>
-      <span *ngIf="doctorDetails.isVerified"><i class="fa-solid fa-circle-check"></i>Verified</span>
+      <span *ngIf="doctorDetails.isVerified"
+        ><i class="fa-solid fa-circle-check"></i>Verified</span
+      >
     </div>
     <div class="doctor-details-form" *ngIf="isRegistrationCommpleted">
       <div class="doctor-details">
@@ -196,7 +263,10 @@
         <span>Experience</span>
         <p>{{ exp }}</p>
       </div>
-      <div class="doctor-details" *ngFor="let qual of doctorDetails.qualification">
+      <div
+        class="doctor-details"
+        *ngFor="let qual of doctorDetails.qualification"
+      >
         <span>Qualification</span>
         <p>{{ qual }}</p>
       </div>
@@ -212,7 +282,10 @@
         <span>City</span>
         <p>{{ doctorDetails.city }}</p>
       </div>
-      <div class="doctor-details" *ngFor="let day of doctorDetails.availableDays">
+      <div
+        class="doctor-details"
+        *ngFor="let day of doctorDetails.availableDays"
+      >
         <span>Available Day</span>
         <p>{{ day }}</p>
       </div>
@@ -220,7 +293,10 @@
         <span>Contact Number</span>
         <p>{{ doctorDetails.contactNumber }}</p>
       </div>
-      <div class="doctor-details" *ngFor="let achievement of doctorDetails.achievements">
+      <div
+        class="doctor-details"
+        *ngFor="let achievement of doctorDetails.achievements"
+      >
         <span>Achievement</span>
         <p>{{ achievement }}</p>
       </div>
@@ -228,46 +304,60 @@
         <span>Award</span>
         <p>{{ award }}</p>
       </div>
-      <div class="doctor-details" *ngFor="let membership of doctorDetails.memberships">
+      <div
+        class="doctor-details"
+        *ngFor="let membership of doctorDetails.memberships"
+      >
         <span>Membership</span>
         <p>{{ membership }}</p>
       </div>
-      <div class="doctor-details" *ngFor="let research of doctorDetails.researches">
+      <div
+        class="doctor-details"
+        *ngFor="let research of doctorDetails.researches"
+      >
         <span>Research</span>
         <p>{{ research }}</p>
       </div>
-      <div class="doctor-details" *ngFor="let language of doctorDetails.languages">
+      <div
+        class="doctor-details"
+        *ngFor="let language of doctorDetails.languages"
+      >
         <span>Language</span>
         <p>{{ language }}</p>
       </div>
       <div class="doctor-details">
         <span>Registered</span>
-        <p>{{ doctorDetails.isRegistered ? 'Yes' : 'No' }}</p>
+        <p>{{ doctorDetails.isRegistered ? "Yes" : "No" }}</p>
       </div>
       <div class="doctor-details">
         <span>Verified</span>
-        <p>{{ doctorDetails.isVerified ? 'Yes' : 'No' }}</p>
+        <p>{{ doctorDetails.isVerified ? "Yes" : "No" }}</p>
       </div>
     </div>
     <div *ngIf="!doctorDetails.isVerified" class="info">
       <i class="fa-solid fa-circle-exclamation"></i>
       You cannot treat patients until the admin verifies your profile.
     </div>
-    <div class="time-slots" *ngIf="doctorDetails.isVerified && doctorDetails.todayNotAvailable || doctorDetails.slots.length == 0">
-      <h4>Set Availability</h4>
+    <div class="time-slot-c1" *ngIf="doctorDetails.isVerified && doctorDetails.todayNotAvailable || doctorDetails.slots.length == 0">
+      <h4 class="tap">Set Availability</h4>
 
-      <!-- Starting Time -->
-      <label for="startingTime">Starting Time:</label>
-      <input type="time" [(ngModel)]="startingTime" id="startingTime" />
+      <div class="time-slot-c2">
+        <!-- Starting Time -->
+        <div class="startingTime">
+          <label for="startingTime" id="startingTime">Starting Time</label>
+          <input type="time" [(ngModel)]="startingTime" id="startingTime" />
+        </div>
 
-      <!-- Ending Time -->
-      <label for="endingTime">Ending Time:</label>
-      <input type="time" [(ngModel)]="endingTime" id="endingTime" />
+        <!-- Ending Time -->
+        <div class="endingTime">
+          <label for="endingTime" id="endingTime">Ending Time</label>
+          <input type="time" [(ngModel)]="endingTime" id="endingTime" />
+        </div>
 
-      <button (click)="generateTimeSlots()">Generate Time Slots</button>
+        <button (click)="generateTimeSlots()">Generate Slots</button>
+      </div>
 
-      <div *ngIf="timeSlots.length > 0">
-        <h4>Available Time Slots</h4>
+      <div *ngIf="timeSlots.length > 0" class="time-slots">
         <div *ngFor="let slot of timeSlots" class="time-slot">
           <input
             type="checkbox"
@@ -277,10 +367,13 @@
           <label [for]="slot.time">{{ slot.time }}</label>
         </div>
       </div>
-      <button (click)="saveSlots()">Save Slots</button>
+      <button (click)="saveSlots()" class="save">Save Slots</button>
     </div>
     <!--Show All the Time Slots-->
-    <div *ngIf="!doctorDetails.todayNotAvailable || doctorDetails.slots.length > 0" class="time-slot-container">
+    <div
+      *ngIf="!doctorDetails.todayNotAvailable || doctorDetails.slots.length > 0"
+      class="time-slot-container"
+    >
       <h4 class="tap">Available Time Slots</h4>
       <div class="time-slots">
         <div *ngFor="let slot of doctorDetails.slots" class="time-slot">
@@ -301,11 +394,12 @@
 
     <div class="appointment-list" *ngIf="doctorDetails.isVerified">
       <div class="tap">Today's Appointments</div>
-      <div *ngIf="doctorDetails.slots.length == 0">
-        No appointments found.
-      </div>
-      <div *ngFor="let appointment of appointments">
-        <p *ngIf="appointment.occupied == true">{{ appointment.time}} {{ appointment.patientName}} {{ appointment.patientMail }}</p>
+      <div *ngIf="doctorDetails.slots.length == 0">No appointments found.</div>
+      <div *ngFor="let appointment of appointments" class="appointments">
+        <span *ngIf="appointment.occupied == true"
+          >{{ appointment.time }} {{ appointment.patientName }}
+          {{ appointment.patientMail }}</span
+        >
       </div>
     </div>
   </div>

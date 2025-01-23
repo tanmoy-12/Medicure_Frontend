@@ -103,3 +103,78 @@ width: calc(100% - 240px);
   padding: 8px 16px;
   border-radius: 4px;
 }
+.doctor-card{
+  padding: 12px;
+  border: 1px solid var(--shade-1);
+  border-radius: 4px;
+  margin: 12px 0;
+  width: 100%;
+  display: flex;
+}
+.doctor-image{
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  background-color: var(--light);
+  margin-right: 18px;
+}
+.doctor-image img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.doctor-details{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;letter-spacing: 0.06rem;
+  gap: 4px;
+  width: 330px;
+  font-size: small;
+  border-right: 1.5px solid var(--shade-2);
+  padding: 0 12px;
+  p{
+    margin: 0px;
+  }
+}
+.experience{
+  padding: 4px 8px;
+  background-color: var(--shade-4);
+  border-radius: 4px;
+  color: var(--shade-2);
+  font-weight: 600;
+  width: max-content;
+}
+.location i{
+  color: var(--shade-2);
+}
+.qualification{
+  font-weight: 600;
+}
+.doctor-appointment{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
+.availableDays{
+  color: var(--dark);
+  font-size: larger;
+  font-weight: 600;
+}
+.bookAppointment{
+  background-color: #ff5100;
+  color: var(--light);
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+.bookAppointment:hover{
+  background-color: #d36a39;
+}
+.doctor-appointment{
+  ul{
+    padding: 0;
+  }
+}

@@ -105,5 +105,10 @@ export class AuthService {
   findAppointments(doctorId: String): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/find-appointments`, { doctorId });
   }
+  //Fetch Appointments by patient email
+  getUserAppointments(userEmail: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/user-appointments`, { userEmail });
+  }
+
 }
 

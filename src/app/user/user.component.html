@@ -37,7 +37,55 @@
     <div class="line"></div>
     <div class="appointments">
       <h4 class="tap">Upcoming Appointments</h4>
+      <div *ngIf="appointments.length > 0; else noAppointments">
+        <div *ngFor="let appointment of appointments" class="doctor-card">
+          <div class="doctor-image">
+            <img
+              *ngIf="appointment.gender === 'Male'"
+              src="https://cdn0.iconfinder.com/data/icons/activities-flat-colorful/2048/2131_-_Doctor-512.png"
+              alt="Doctor's Image"
+            />
+            <img
+              *ngIf="appointment.gender === 'Female'"
+              src="https://www.pngmart.com/files/21/Female-Doctor-PNG-HD-Isolated.png"
+              alt="Doctor's Image"
+            />
+          </div>
+          <div class="doctor-details">
+            <h5>{{ appointment.doctorName }}</h5>
+            <p class="experience">
+              {{ appointment.experienceInYears }}+ years Experience
+            </p>
+            <p>{{ getUpperCaseSpecialization(appointment.specialization) }}</p>
+            <p class="qualification">{{ appointment.qualification.join(", ") }}</p>
+            <p class="location">
+              <i class="fa-solid fa-location-dot"></i>&nbsp;{{ appointment.clinicName }},
+              {{ appointment.city }}
+            </p>
+            <p>Language: {{ appointment.languages.join(", ") }}</p>
+          </div>
+          <div class="doctor-appointment">
+            <div *ngIf="appointment.slots.length > 0">
+              <h5>Scheduled Slots:</h5>
+              <ul>
+                <li *ngFor="let slot of appointment.slots">
+                  {{ slot.time }}
+                </li>
+              </ul>
+            </div>
+            <button
+              class="bookAppointment"
+              (click)="removeAppointment(appointment.email)"
+            >
+              Remove Appointment
+            </button>
+          </div>
+        </div>
+      </div>
 
+      <ng-template #noAppointments>
+        <p>No appointments found.</p>
+      </ng-template>
     </div>
   </div>
 </div>

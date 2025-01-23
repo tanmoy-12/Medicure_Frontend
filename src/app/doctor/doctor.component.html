@@ -338,7 +338,7 @@
       <i class="fa-solid fa-circle-exclamation"></i>
       You cannot treat patients until the admin verifies your profile.
     </div>
-    <div class="time-slot-c1" *ngIf="doctorDetails.isVerified && doctorDetails.todayNotAvailable || doctorDetails.slots.length == 0">
+    <div class="time-slot-c1" *ngIf="doctorDetails.isVerified && doctorDetails.todayNotAvailable && doctorDetails.slots.length == 0">
       <h4 class="tap">Set Availability</h4>
 
       <div class="time-slot-c2">

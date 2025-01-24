@@ -14,6 +14,10 @@ export class AuthService {
   sendMessageForm(name: String, email: String, message: String): Observable<any> {
     return this.http.post(`${this.apiUrl}/contact-form`, { name, email, message });
   }
+  //Book Emergency Appointment
+  bookEmergencyAppointment(data: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/book-emergency-appointment`, data);
+  }
   // Signup form
   signup(data: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/signup`, data);

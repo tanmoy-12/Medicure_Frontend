@@ -81,15 +81,15 @@ export class LoginComponent {
             if (res.isAdmin) {
               localStorage.setItem('token', res.token);
               localStorage.setItem('isAdmin', res.isAdmin.toString());
-              this.router.navigate(['admin']);
+              this.router.navigate(['/']);
             }else if (res.isDoctor){
               localStorage.setItem('token', res.token);
               localStorage.setItem('isDoctor', res.isDoctor.toString());
-              this.router.navigate(['doctor']);
+              this.router.navigate(['/']);
             }
             else {
               localStorage.setItem('token', res.token);
-              this.router.navigate(['user']);
+              this.router.navigate(['/']);
             }
 
             this.notification.showNotification(`${res.msg}`, 'success');

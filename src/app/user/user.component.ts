@@ -41,11 +41,9 @@ export class UserComponent {
       this.authService.getUserAppointments(this.email).subscribe(
         (response) => {
           this.appointments = response;
-          console.log(response)
         },
         (error) => {
-          console.error('Error fetching appointments:', error);
-          alert('No appointments found or error occurred.');
+          this.notification.showNotification(`${error}`, 'error'); // Show error message
         }
       );
     }

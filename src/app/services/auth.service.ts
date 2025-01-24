@@ -113,6 +113,9 @@ export class AuthService {
   getUserAppointments(userEmail: string): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/user-appointments`, { userEmail });
   }
-
+  //Cancel Appointment
+  cancelAppointment(doctorId: String, slotId: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/cancel-appointment`, { doctorId, slotId });
+  }
 }
 

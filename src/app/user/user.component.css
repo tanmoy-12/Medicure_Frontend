@@ -174,7 +174,11 @@ width: calc(100% - 240px);
   background-color: #d36a39;
 }
 .doctor-appointment{
+  text-align: center;
   ul{
     padding: 0;
+  }
+  button{
+    margin-bottom: 12px;
   }
 }

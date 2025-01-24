@@ -119,7 +119,6 @@ export class BookingComponent {
       return acc;
     }, {});
 
-    console.log('Filters being sent:', filters); // Debug
 
     this.authService.fetchFilteredDoctorDetails(filters)
       .subscribe({
@@ -127,8 +126,7 @@ export class BookingComponent {
           this.doctors = response.doctors || [];
         },
         error: (error) => {
-          console.error('Error fetching doctors:', error);
-          this.doctors = [];
+          console.error('Error fetching doctors:');
         }
       });
   }
@@ -150,7 +148,6 @@ export class BookingComponent {
   }
 
   bookAppointmentToggle(email:  string){
-    console.log(email)
     this.isappointmentCard = !this.isappointmentCard;
     this.authService.findUnoccupiedSlots(email).subscribe(
       (res)=>{
@@ -170,17 +167,17 @@ export class BookingComponent {
           (res) => {
             this.selectedSlotId = null; // Reset selection after booking
             this.isappointmentCard = false; // Hide appointment card after booking
-            this.notificationService.showNotification('Appointment booked successfully', 'success');
+            this.notificationService.showNotification(`${res.message}`, 'success');
           },
           (error) => {
-            console.error('Error booking appointment:', error);
+            this.notificationService.showNotification(`${error.error.message}`, 'error');
           }
         );
     }
   }
 
   isSlotDisabled(slotTime: string): boolean {
-    // Extract start time from the slot
+    //Extract start time from the slot
     const [startTime] = slotTime.split(' - ');
     const [time, meridian] = startTime.split(' '); // Split time and AM/PM
     const [hours, minutes] = time.split(':').map(Number);

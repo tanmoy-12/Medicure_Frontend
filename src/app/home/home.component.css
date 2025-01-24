@@ -27,8 +27,55 @@ a{
     text-decoration: none;
     color: #ffd4fd;
 }
-
-
+.main{
+  position: relative;
+}
+.popup{
+  background-color: #000000ce;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+.popup-container{
+  width: 700px;
+  height: 300px;
+  background-color: var(--light);
+  border-radius: 4px;
+  padding: 18px;
+}
+.closePopup{
+  color: #ffffff;
+  font-size: large;
+  border: none;
+  background-color: #ff5900;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+.popup-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  a{
+    color:  #00789d;
+    font-size: large;
+    font-weight: 600;
+    margin-bottom: 18px;
+  }
+}
+.popup-text{
+  font-size: larger;
+  font-weight: 500;
+  margin-bottom: 18px;
+}
 /************************************ CSS STYLINGS FOR NAVBAR ********************************/
 
 

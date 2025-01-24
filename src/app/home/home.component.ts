@@ -5,15 +5,20 @@ import { RouterLink, Router, RouterModule } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { NotificationService } from '../services/notification.service';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NavbarComponent, FooterComponent, RouterLink, RouterModule, FormsModule],
+  imports: [NavbarComponent, FooterComponent, RouterLink, RouterModule, FormsModule, NgIf],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
+
+  isLoggedIn = localStorage.getItem('token');
+  showPopup: boolean = true;
+
   constructor(
     public router: Router,
   ){}
@@ -32,6 +37,11 @@ export class HomeComponent {
   message: string = '';
   isLoading: boolean = false;
 
+  ngOnInit(){
+    if(this.isLoggedIn){
+      this.showPopup = false;
+    }
+  }
   nextSlide() {
     if (this.currentIndex < this.totalSlides - this.visibleSlides) {
       this.currentIndex++;
@@ -78,5 +88,10 @@ export class HomeComponent {
     this.email = '';
     this.phone = '';
     this.message = '';
+  }
+
+  //To close popup
+  closePopup(){
+    this.showPopup = false;
   }
 }

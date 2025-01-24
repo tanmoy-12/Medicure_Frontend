@@ -52,8 +52,16 @@ export class UserComponent {
     return specialization.toUpperCase();
   }
 
-  removeAppointment(email: string){
-
+  cancelAppointment(doctorId: String, slotId: string){
+    this.authService.cancelAppointment(doctorId, slotId).subscribe(
+      (res) => {
+        this.notification.showNotification(`${res.message}`,'success'); // Show success message
+        this.fetchAppointments();
+      },
+      (err) => {
+        this.notification.showNotification(`${err.error.message}`, 'error'); // Show error message
+      }
+    )
   }
 
   logout() {

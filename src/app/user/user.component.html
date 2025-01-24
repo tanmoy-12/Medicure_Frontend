@@ -67,18 +67,13 @@
           <div class="doctor-appointment">
             <div *ngIf="appointment.slots.length > 0">
               <h5>Scheduled Slots:</h5>
-              <ul>
-                <li *ngFor="let slot of appointment.slots">
+              <ul class="d-flex flex-column justify-content-center">
+                <li *ngFor="let slot of appointment.slots" class="text-center">
                   {{ slot.time }}
                 </li>
+                <button *ngFor="let slot of appointment.slots" class="bookAppointment" (click)="cancelAppointment(appointment._id, slot._id)">Cancel Appointment</button>
               </ul>
             </div>
-            <button
-              class="bookAppointment"
-              (click)="removeAppointment(appointment.email)"
-            >
-              Remove Appointment
-            </button>
           </div>
         </div>
       </div>

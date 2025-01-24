@@ -246,3 +246,9 @@
     font-weight: 600;
   }
 }
+.slot.disabled {
+  background-color: #d3d3d3;
+  color: #999;
+  pointer-events: none;
+  cursor: not-allowed;
+}

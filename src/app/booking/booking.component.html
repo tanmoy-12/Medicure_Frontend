@@ -158,7 +158,8 @@
                 *ngFor="let slot of doctorAppointment.slots"
                 class="slot"
                 [class.selected]="selectedSlotId === slot._id"
-                (click)="selectSlot(slot._id)"
+                [class.disabled]="isSlotDisabled(slot.time)"
+                (click)="!isSlotDisabled(slot.time) && selectSlot(slot._id)"
               >
                 <p>{{ slot.time }}</p>
                 <div class="ticker" *ngIf="selectedSlotId === slot._id">

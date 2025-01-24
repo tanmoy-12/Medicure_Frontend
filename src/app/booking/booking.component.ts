@@ -178,4 +178,23 @@ export class BookingComponent {
         );
     }
   }
+
+  isSlotDisabled(slotTime: string): boolean {
+    // Extract start time from the slot
+    const [startTime] = slotTime.split(' - ');
+    const [time, meridian] = startTime.split(' '); // Split time and AM/PM
+    const [hours, minutes] = time.split(':').map(Number);
+
+    // Create a Date object for the slot's start time
+    let slotDate = new Date();
+    slotDate.setHours(
+      meridian === 'PM' && hours !== 12 ? hours + 12 : hours === 12 ? 12 : hours,
+      minutes,
+      0,
+      0
+    );
+
+    const now = new Date(); // Current time
+    return slotDate < now; // Disable if slot start time is earlier than current time
+  }
 }

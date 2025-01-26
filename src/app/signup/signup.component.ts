@@ -48,53 +48,46 @@ export class SignupComponent {
   }
 
   onSubmit() {
-  // Initial signup: If OTP hasn't been sent yet
-  if (!this.otpSent) {
-    // Check if the signup form is valid
-    if (this.signupForm.invalid) return;
+    if (!this.otpSent) {
+      if (this.signupForm.invalid) return;
 
-    // Set loading to true before API call
-    this.loading = true;
-    // Call the signup method from the AuthService
-    this.authService.signup(this.signupForm.value).subscribe(
-      (res) => {
-        // Handle errors returned by the server (e.g., user already exists)
-        if (res.error) {
+      this.loading = true;
+      this.authService.signup(this.signupForm.value).subscribe(
+        (res) => {
+          if (res.error) {
+            this.loading = false;
+            this.notification.showNotification(res.msg, 'error');
+            return;
+          }
           this.loading = false;
-          this.notification.showNotification(res.msg, 'error');
-          return;
+          this.otpSent = true;
+          this.notification.showNotification(res.msg, 'success');
+        },
+        (err) => {
+          this.loading = false;
+          this.notification.showNotification(err.error?.msg || 'Signup failed. Please try again.', 'error');
         }
-        // OTP sent successfully
-        this.loading = false;
-        this.otpSent = true;
-        this.notification.showNotification(res.msg, 'success');
-      },
-      (err) => {
-        // Handle API errors (e.g., server or network issues)
-        this.loading = false;
-        this.notification.showNotification(err.error?.msg || 'Signup failed. Please try again.', 'error');
-      }
-    );
-  } else {
-    // OTP verification phase
-    this.loading = true;
-
-    // Call the verifyOtp method from the AuthService
-    this.authService.verifyOtp(this.signupForm.value).subscribe(
-      (res) => {
-        // OTP verified successfully, navigate to login
-        this.loading = false;
-        this.router.navigate(['login']);
-        this.notification.showNotification(res.msg, 'success');
-      },
-      (err) => {
-        // Handle OTP verification errors (e.g., invalid OTP)
-        this.loading = false;
-        this.notification.showNotification(err.error?.msg || 'OTP verification failed. Please try again.', 'error');
-      }
-    );
+      );
+    } else {
+      this.loading = true;
+      this.authService.verifyOtp(this.signupForm.value).subscribe(
+        (res) => {
+          this.loading = false;
+          if (res.error) {
+            this.notification.showNotification(res.msg, 'error');
+            return;
+          }
+          this.router.navigate(['login']);
+          this.notification.showNotification(res.msg, 'success');
+        },
+        (err) => {
+          this.loading = false;
+          this.notification.showNotification(err.error?.msg || 'OTP verification failed. Please try again.', 'error');
+        }
+      );
+    }
   }
-}
+
 
   // Helper functions to check password validity
   isValidPasswordLength(): boolean {

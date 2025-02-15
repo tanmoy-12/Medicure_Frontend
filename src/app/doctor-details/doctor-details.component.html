@@ -36,7 +36,6 @@
         <strong>City:</strong> <span>{{ doctor.city }}</span><br>
         <strong>Starting Time:</strong> <span>{{ doctor.startingTime }}</span><br>
         <strong>Ending Time:</strong> <span>{{ doctor.endingTime }}</span><br>
-        <strong>Slots:</strong> <span *ngFor="let slot of doctor.slots">{{ slot.time }} (Available: {{ slot.available }}, Occupied: {{ slot.occupied }})</span><br>
         <strong>Available Days:</strong> <span>{{ doctor.availableDays.join(', ') }}</span><br>
         <strong>Contact Number:</strong> <span>{{ doctor.contactNumber }}</span><br>
       </div>

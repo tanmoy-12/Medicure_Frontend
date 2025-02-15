@@ -45,8 +45,59 @@ ul{
 ::-webkit-scrollbar-thumb:hover {
   background: #1b1b1b;
 }
-.navbar{
-  background-color: var(--shade-3);
+.navbar {
+  padding: 1rem 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: #EBFBFF;
+}
+
+.nav__logo {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.nav__links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  font-size: medium;
+  font-weight: 600;
+}
+
+.nav__links a:hover{
+  color: #003b2c;
+  font-size: large;
+}
+
+.link a {
+  text-decoration: none;
+  color: var(--text-light);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn {
+  padding: 1rem 2rem;
+  outline: none;
+  border: none;
+  font-size: 1rem;
+  color: #ffffff;
+  font-size: large;
+  background-color: var(--shade-2);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+
+
+.btn:hover {
+  background-color: #007552;
 }
 .highlighter{
   background-color: var(--light-green);

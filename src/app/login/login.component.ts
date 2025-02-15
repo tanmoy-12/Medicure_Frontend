@@ -77,6 +77,7 @@ export class LoginComponent {
                 }
               )
             }
+            localStorage.setItem('userId', res.userId);
 
             if (res.isAdmin) {
               localStorage.setItem('token', res.token);

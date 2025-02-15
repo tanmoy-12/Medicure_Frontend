@@ -296,7 +296,7 @@
               <li>Basic coverage</li>
               <li>24/7 support</li>
             </ul>
-            <button class="select-button">Select</button>
+            <button class="select-button" (click)="openPlanPopup('Basic')">Select</button>
           </div>
 
           <!-- Standard Plan -->
@@ -308,7 +308,7 @@
               <li>Comprehensive coverage</li>
               <li>Priority support</li>
             </ul>
-            <button class="select-button">Select</button>
+            <button class="select-button" (click)="openPlanPopup('Standard')">Select</button>
           </div>
 
           <!-- Premium Plan -->
@@ -320,11 +320,24 @@
               <li>Dedicated support team</li>
               <li>Customizable options</li>
             </ul>
-            <button class="select-button">Select</button>
+            <button class="select-button" (click)="openPlanPopup('Premium')">Select</button>
           </div>
         </div>
       </div>
     </section>
+    <div id="subscription-popup" class="popup-overlay" *ngIf="showPlanPopup" (click)="closePlanPopup()">
+      <div class="popup-content" (click)="$event.stopPropagation()">
+        <span class="close-btn" (click)="closePlanPopup()">&times;</span>
+        <h2>{{ selectedPlan?.name }}</h2>
+        <p>Price: {{ selectedPlan?.price }}</p>
+        <p>Discount: {{ selectedPlan?.discount }}</p>
+        <ul>
+          <li *ngFor="let feature of selectedPlan?.features">{{ feature }}</li>
+        </ul>
+        <p>Extra: {{ selectedPlan?.extra }}</p>
+        <img [src]="selectedPlan?.qr" alt="QR Code" width="150" height="150">
+      </div>
+    </div>
 
     <!--============================================== SERVICES OFFERED ============================================-->
     <section id="our-services" style="border-radius: 6px">

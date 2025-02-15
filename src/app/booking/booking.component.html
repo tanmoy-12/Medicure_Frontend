@@ -129,6 +129,12 @@
         >
           Book Appointment
         </button>
+        <button
+          class="bookAppointment"
+          (click)="viewDetails(doctor._id)"
+        >
+          View Details
+        </button>
       </div>
     </div>
     <div class="appointment-card" *ngIf="isappointmentCard">

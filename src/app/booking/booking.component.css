@@ -109,6 +109,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 12px;
   width: 50%;
 }
 .availableDays{

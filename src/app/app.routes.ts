@@ -3,11 +3,14 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { AppointmentComponent } from './appointment/appointment.component';
-import { Routes, CanActivate } from '@angular/router';
 import { AdminComponent } from './admin/admin.component';
 import { UserComponent } from './user/user.component';
 import { DoctorComponent } from './doctor/doctor.component';
 import { BookingComponent } from './booking/booking.component';
+import { DoctorDetailsComponent } from './doctor-details/doctor-details.component';
+import { CommunityComponent } from './community/community.component';
+
+import { Routes, CanActivate } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard'
 import { OpenGuard } from './guards/open.guard';
 import { AdminGuard } from './guards/admin.guard';
@@ -22,5 +25,8 @@ export const routes: Routes = [
   { path: 'user', component: UserComponent, canActivate: [OpenGuard] },  // Change to UserComponent when user authentication is implemented
   { path: 'doctor', component: DoctorComponent, canActivate: [OpenGuard]},
   { path: 'appointment', component:AppointmentComponent },
-  { path: 'booking', component: BookingComponent, canActivate: [OpenGuard]}
+  { path: 'booking', component: BookingComponent, canActivate: [OpenGuard]},
+  { path: 'doctor-details/:id', component: DoctorDetailsComponent },
+  { path: 'community', component: CommunityComponent },
+  // Add more routes as needed
 ];

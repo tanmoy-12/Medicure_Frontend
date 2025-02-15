@@ -10,7 +10,15 @@ import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 @Component({
   selector: 'app-doctor',
   standalone: true,
-  imports: [RouterLink, FooterComponent, NgIf, FormsModule, ReactiveFormsModule, NgFor, FormsModule],
+  imports: [
+    RouterLink,
+    FooterComponent,
+    NgIf,
+    FormsModule,
+    ReactiveFormsModule,
+    NgFor,
+    FormsModule,
+  ],
   templateUrl: './doctor.component.html',
   styleUrl: './doctor.component.css',
 })
@@ -25,6 +33,7 @@ export class DoctorComponent {
   //Get user email from localstorage
   email = localStorage.getItem('email');
   userName = localStorage.getItem('userName');
+  userId = localStorage.getItem('userId');
 
   startingTime: string = '';
   endingTime: string = '';
@@ -50,7 +59,10 @@ export class DoctorComponent {
       address: ['', Validators.required],
       city: ['', Validators.required],
       availableDays: this.fb.array([this.fb.control('', Validators.required)]),
-      contactNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+      contactNumber: [
+        '',
+        [Validators.required, Validators.pattern('^[0-9]{10}$')],
+      ],
       achievements: this.fb.array([this.fb.control('', Validators.required)]),
       awards: this.fb.array([this.fb.control('', Validators.required)]),
       memberships: this.fb.array([this.fb.control('', Validators.required)]),
@@ -77,7 +89,13 @@ export class DoctorComponent {
     city: '',
     todayNotAvailable: false,
     slots: [
-      {time: '', available: true, patientName: '', patientMail: '', occupied: false}
+      {
+        time: '',
+        available: true,
+        patientName: '',
+        patientMail: '',
+        occupied: false,
+      },
     ],
     availableDays: [],
     contactNumber: '',
@@ -88,11 +106,31 @@ export class DoctorComponent {
     languages: [],
     isRegistered: false,
     isVerified: false,
-  }
+  };
   appointments = [
-    {time: '', available: true, patientName: '', patientMail: '', occupied: false}
-  ]
-    generateTimeSlots() {
+    {
+      time: '',
+      available: true,
+      patientName: '',
+      patientMail: '',
+      occupied: false,
+    },
+  ];
+  meetings = [{ requestedAt: '', userName: '', email: '' }];
+  fetchMeetings() {
+    if (this.userId) {
+      this.authService.getMeetings(this.userId).subscribe(
+        (response) => {
+          this.meetings = response;
+          console.log(this.meetings);
+        },
+        (error) => {
+          console.error('Error fetching meetings:', error);
+        }
+      );
+    }
+  }
+  generateTimeSlots() {
     if (!this.startingTime || !this.endingTime) {
       alert('Please select both starting and ending times');
       return;
@@ -108,7 +146,13 @@ export class DoctorComponent {
       const slotEnd = new Date(start);
 
       this.timeSlots.push({
-        time: `${slotStart.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - ${slotEnd.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`,
+        time: `${slotStart.toLocaleTimeString([], {
+          hour: '2-digit',
+          minute: '2-digit',
+        })} - ${slotEnd.toLocaleTimeString([], {
+          hour: '2-digit',
+          minute: '2-digit',
+        })}`,
         available: true,
       });
     }
@@ -117,7 +161,7 @@ export class DoctorComponent {
   saveSlots() {
     const data = { slots: this.timeSlots };
     console.log(data);
-    if(this.email){
+    if (this.email) {
       this.authService.assignTimeSlots(this.doctorDetails._id, data).subscribe(
         (response) => {
           alert('Slots saved successfully!');
@@ -135,26 +179,25 @@ export class DoctorComponent {
       .replace(/^[a-z]/, (char) => char.toUpperCase()); // Capitalize the first letter
   }
 
-  ngOnInit(): void{
-    if(this.email){
-      this.authService.doctorRegistered(this.email).subscribe(
-        (res) => {
-          this.isRegistrationCommpleted = res.doctorRegistered;
-        }
-      )
-      if(this.isRegistrationCommpleted){
-        this.authService.fetchDoctorDetails(this.email).subscribe(
-          (res) => {
-            this.doctorDetails = res.doctor;
-            this.doctorForm.patchValue(this.doctorDetails);
-            this.fetchAppointments(this.doctorDetails._id)
-          }
-        )
+  ngOnInit(): void {
+    if (this.email) {
+      this.authService.doctorRegistered(this.email).subscribe((res) => {
+        this.isRegistrationCommpleted = res.doctorRegistered;
+      });
+      if (this.isRegistrationCommpleted) {
+        this.authService.fetchDoctorDetails(this.email).subscribe((res) => {
+          this.doctorDetails = res.doctor;
+          this.doctorForm.patchValue(this.doctorDetails);
+          this.fetchAppointments(this.doctorDetails._id);
+        });
       }
-      if(!this.doctorDetails.todayNotAvailable){
-        this.originalSlots = JSON.parse(JSON.stringify(this.doctorDetails.slots));
+      if (!this.doctorDetails.todayNotAvailable) {
+        this.originalSlots = JSON.parse(
+          JSON.stringify(this.doctorDetails.slots)
+        );
       }
     }
+    this.fetchMeetings();
   }
   get formControls() {
     return this.doctorForm.controls;
@@ -174,7 +217,10 @@ export class DoctorComponent {
 
     this.authService.updateSlots(this.doctorDetails._id, editedSlots).subscribe(
       (response) => {
-        this.notification.showNotification('Slots updated successfully!', 'success');
+        this.notification.showNotification(
+          'Slots updated successfully!',
+          'success'
+        );
         this.hasChanges = false;
         this.originalSlots = JSON.parse(
           JSON.stringify(this.doctorDetails.slots)
@@ -189,7 +235,7 @@ export class DoctorComponent {
   discardEdits() {
     this.doctorDetails.slots = JSON.parse(JSON.stringify(this.originalSlots));
     this.hasChanges = false;
-    window.location.reload()
+    window.location.reload();
   }
   getFormArray(field: string): FormArray {
     return this.doctorForm.get(field) as FormArray;
@@ -209,7 +255,7 @@ export class DoctorComponent {
   fetchAppointments(doctorId: string): void {
     this.authService.findAppointments(doctorId).subscribe(
       (response) => {
-        console.log(response.appointments)
+        console.log(response.appointments);
         this.appointments = response.appointments;
       },
       (error) => {
@@ -225,14 +271,30 @@ export class DoctorComponent {
 
       // Ensure all required keys are present
       const requiredKeys = [
-        'doctorName', 'doctorRegistrationNumber', 'gender', 'details',
-        'specialization', 'experienceInYears', 'experience', 'qualification',
-        'clinicName', 'address', 'city', 'availableDays', 'contactNumber',
-        'achievements', 'awards', 'memberships', 'researches', 'languages',
-        'isVerified', 'isRegistered', 'email'
+        'doctorName',
+        'doctorRegistrationNumber',
+        'gender',
+        'details',
+        'specialization',
+        'experienceInYears',
+        'experience',
+        'qualification',
+        'clinicName',
+        'address',
+        'city',
+        'availableDays',
+        'contactNumber',
+        'achievements',
+        'awards',
+        'memberships',
+        'researches',
+        'languages',
+        'isVerified',
+        'isRegistered',
+        'email',
       ];
 
-      const missingKeys = requiredKeys.filter(key => !(key in formData));
+      const missingKeys = requiredKeys.filter((key) => !(key in formData));
       if (missingKeys.length > 0) {
         this.isSubmitting = false;
         this.notification.showNotification(
@@ -247,27 +309,34 @@ export class DoctorComponent {
         next: (res) => {
           this.isSubmitting = false;
           window.location.reload();
-          this.notification.showNotification('Doctor details updated successfully!', 'success');
+          this.notification.showNotification(
+            'Doctor details updated successfully!',
+            'success'
+          );
         },
         error: (err) => {
           this.isSubmitting = false;
-          this.notification.showNotification(err.error.message || 'Failed to update doctor details.', 'error');
+          this.notification.showNotification(
+            err.error.message || 'Failed to update doctor details.',
+            'error'
+          );
         },
       });
     } else {
       // Highlight invalid fields
-      Object.keys(this.doctorForm.controls).forEach(field => {
+      Object.keys(this.doctorForm.controls).forEach((field) => {
         const control = this.doctorForm.get(field);
         if (control) {
           control.markAsTouched({ onlySelf: true });
         }
       });
 
-      this.notification.showNotification('Please fill out all required fields.', 'error');
+      this.notification.showNotification(
+        'Please fill out all required fields.',
+        'error'
+      );
     }
   }
-
-
 
   logout() {
     const email = localStorage.getItem('email');
@@ -304,6 +373,46 @@ export class DoctorComponent {
           gallerySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       });
+    }
+  }
+  scheduleMeeting(email: string) {
+    if(this.userId){
+      this.authService.scheduleMeeting(this.userId, email, 'accept').subscribe(
+        (res) => {
+          this.notification.showNotification(
+            'Meeting scheduled successfully!',
+           'success'
+          );
+        },
+        (error) => {
+          console.error('Error scheduling meeting:', error);
+          this.notification.showNotification(
+            'Failed to schedule meeting. Please try again later.',
+            'error'
+          );
+        }
+      );
+      this.fetchMeetings();
+    }
+  }
+  cancelMeeting(email: string){
+    if(this.userId){
+      this.authService.scheduleMeeting(this.userId, email, 'reject').subscribe(
+        (res) => {
+          this.notification.showNotification(
+            'Meeting cancelled successfully!',
+           'success'
+          );
+        },
+        (error) => {
+          console.error('Error cancelling meeting:', error);
+          this.notification.showNotification(
+            'Failed to cancel meeting. Please try again later.',
+            'error'
+          );
+        }
+      );
+      this.fetchMeetings();
     }
   }
 }

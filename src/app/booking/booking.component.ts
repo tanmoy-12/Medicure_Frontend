@@ -4,6 +4,7 @@ import { FooterComponent } from '../footer/footer.component';
 import { NgFor, NgIf } from '@angular/common';
 import { AuthService } from '../services/auth.service';
 import { NotificationService } from '../services/notification.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-booking',
@@ -38,6 +39,7 @@ export class BookingComponent {
 
   email = localStorage.getItem('email');
   userName = localStorage.getItem('userName');
+  private router = inject(Router);
 
   specialities = [
     { name: 'General Physician', value: 'general_physician' },
@@ -174,6 +176,9 @@ export class BookingComponent {
           }
         );
     }
+  }
+  viewDetails(Id: String){
+    this.router.navigate(['/doctor-details/'+Id]);
   }
 
   isSlotDisabled(slotTime: string): boolean {

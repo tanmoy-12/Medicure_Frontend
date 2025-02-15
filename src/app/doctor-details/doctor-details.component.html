@@ -1,0 +1,54 @@
+<div class="navbar">
+  <app-navbar></app-navbar>
+</div>
+<div class="main">
+  <div class="doctor-card">
+    <div class="details-top">
+      <div class="doctor-image">
+        <img
+          *ngIf="doctor.gender === 'Male'"
+          src="https://cdn0.iconfinder.com/data/icons/activities-flat-colorful/2048/2131_-_Doctor-512.png"
+          alt="Doctor's Image"
+        />
+        <img
+          *ngIf="doctor.gender === 'Female'"
+          src="https://www.pngmart.com/files/21/Female-Doctor-PNG-HD-Isolated.png"
+          alt="Doctor's Image"
+        />
+      </div>
+      <div class="doctor-basic">
+        <h1 style="margin: 0;">Dr. {{ doctor.userName }}</h1>
+        <span style="font-size: larger;color: var(--shade-2);">{{ doctor.specialization }}</span><br>
+        <hr>
+        <span>{{ doctor.doctorRegistrationNumber }}</span><br>
+        <span>{{ doctor.experienceInYears }}+ Years Expierence</span>
+        <span>{{ doctor.languages.join(', ') }}</span><br>
+
+      </div>
+    </div>
+    <div class="doctor-details">
+      <div class="details-middle">
+        <h2>Description</h2> <span>{{ doctor.details }}</span><br>
+        <strong>Experience:</strong> <span>{{ doctor.experience.join(', ') }}</span><br>
+        <strong>Qualification:</strong> <span>{{ doctor.qualification.join(', ') }}</span><br>
+        <strong>Clinic Name:</strong> <span>{{ doctor.clinicName }}</span><br>
+        <strong>Address:</strong> <span>{{ doctor.address }}</span><br>
+        <strong>City:</strong> <span>{{ doctor.city }}</span><br>
+        <strong>Starting Time:</strong> <span>{{ doctor.startingTime }}</span><br>
+        <strong>Ending Time:</strong> <span>{{ doctor.endingTime }}</span><br>
+        <strong>Slots:</strong> <span *ngFor="let slot of doctor.slots">{{ slot.time }} (Available: {{ slot.available }}, Occupied: {{ slot.occupied }})</span><br>
+        <strong>Available Days:</strong> <span>{{ doctor.availableDays.join(', ') }}</span><br>
+        <strong>Contact Number:</strong> <span>{{ doctor.contactNumber }}</span><br>
+      </div>
+
+      <div class="details-bottom">
+        <strong>Achievements:</strong> <span>{{ doctor.achievements.join(', ') }}</span><br>
+        <strong>Awards:</strong> <span>{{ doctor.awards.join(', ') }}</span><br>
+        <strong>Memberships:</strong> <span>{{ doctor.memberships.join(', ') }}</span><br>
+        <strong>Researches:</strong> <span>{{ doctor.researches.join(', ') }}</span><br>
+      </div>
+    </div>
+
+  </div>
+</div>
+<app-footer></app-footer>

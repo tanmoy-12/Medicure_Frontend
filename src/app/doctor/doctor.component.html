@@ -1,7 +1,13 @@
 <div class="main">
   <div class="left-section">
-    <div class="logo">MediCure</div>
+    <div class="logo">
+      <span style="color: #fff;"><span style="color: var(--shade-1);">FIT</span>GENIE</span>
+    </div>
     <div class="menu">
+      <div class="welcome">
+        <span>Welcome,<br><span style="color: var(--shade-1);">{{ userName }}</span></span>
+      </div>
+
       <li class="dashboard-active">
         <img src="dashboard.png" alt="" width="20px" />&nbsp;&nbsp;
         <p>Dashboard</p>
@@ -12,29 +18,15 @@
           <p>Home</p>
         </li></a
       >
+
       <li (click)="logout()">
         <i class="fa-solid fa-power-off"></i>&nbsp;&nbsp;
         <p>Log Out</p>
       </li>
     </div>
     <hr />
-    <div class="contact-section">
-      <img
-        src="https://th.bing.com/th/id/R.a256ed4793f1500bb4376e15e969adc1?rik=M1h%2fBGLQuVWQrQ&riu=http%3a%2f%2fpluspng.com%2fimg-png%2fcartoon-kid-png-cartoon-person-exercising-1425.png&ehk=audsA1%2fWXcKbAN0UQX7K98tXHva%2bZG6DeuhFWrpLM2A%3d&risl=&pid=ImgRaw&r=0"
-        alt=""
-      />
-      <div class="contact-text">
-        <p>Need Help? Feel free to ask us</p>
-        <button (click)="goToSection('contact')">Contact Us</button>
-      </div>
-    </div>
   </div>
   <div class="right-section">
-    <div class="welcome">
-      <h3>Hi, {{ userName }}</h3>
-      <p>Welcome to your doctor dashboard!</p>
-    </div>
-    <div class="line"></div>
     <div class="doctor-registration" *ngIf="!isRegistrationCommpleted">
       <form
         [formGroup]="doctorForm"
@@ -400,6 +392,21 @@
           >{{ appointment.time }} {{ appointment.patientName }}
           {{ appointment.patientMail }}</span
         >
+      </div>
+    </div>
+    <div class="appointment-list" *ngIf="doctorDetails.isVerified && meetings.length > 0">
+      <div class="tap">Today's Meetings</div>
+      <div *ngFor="let meeting of meetings" class="appointments">
+        <div class="m-rows">
+          <span
+          >{{ meeting.requestedAt }} {{ meeting.userName }}
+          {{ meeting.email }}</span
+          >
+          <div class="btns">
+            <button (click)="cancelMeeting(meeting.email)">Cancel</button>
+            <button (click)="scheduleMeeting(meeting.email)">Accept</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

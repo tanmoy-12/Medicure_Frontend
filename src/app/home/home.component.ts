@@ -5,12 +5,20 @@ import { RouterLink, Router, RouterModule } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { NotificationService } from '../services/notification.service';
-import { NgIf } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 
+interface Plan {
+  name: string;
+  price: string;
+  discount: string;
+  features: string[];
+  extra: string;
+  qr: string;
+}
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NavbarComponent, FooterComponent, RouterLink, RouterModule, FormsModule, NgIf],
+  imports: [NavbarComponent, FooterComponent, RouterLink, RouterModule, FormsModule, NgIf, NgFor],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -36,11 +44,28 @@ export class HomeComponent {
   phone: string = '';
   message: string = '';
   isLoading: boolean = false;
+  showPlanPopup = false;
+  selectedPlan: Plan | null = null;
+
 
   ngOnInit(){
     if(this.isLoggedIn){
       this.showPopup = false;
     }
+  }
+  plans = {
+    'Basic': { name: 'Basic Plan', price: 'Free', discount: 'No discount', features: ['No setup fees', 'Basic coverage', '24/7 support'], extra: 'Limited support', qr: 'https://via.placeholder.com/150' },
+    'Standard': { name: 'Standard Plan', price: '₹ 299 / month', discount: '10% off yearly', features: ['No hidden fees', 'Comprehensive coverage', 'Priority support'], extra: 'Health articles', qr: 'https://via.placeholder.com/150' },
+    'Premium': { name: 'Premium Plan', price: '₹ 599 / month', discount: '15% off yearly', features: ['All-inclusive coverage', 'Dedicated support', 'Customizable options'], extra: 'Free teleconsultation', qr: 'https://via.placeholder.com/150' }
+  };
+
+  openPlanPopup(planName: keyof typeof this.plans) {
+    this.selectedPlan = this.plans[planName];
+    this.showPlanPopup = true;
+  }
+
+  closePlanPopup() {
+    this.showPlanPopup = false;
   }
   nextSlide() {
     if (this.currentIndex < this.totalSlides - this.visibleSlides) {

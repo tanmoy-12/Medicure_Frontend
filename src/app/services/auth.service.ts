@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
 
-  //private apiUrl = 'http://localhost:3000/medicure/routes';
-  private apiUrl = 'https://shared-server-cxer.onrender.com/medicure/routes';
+  private apiUrl = 'http://localhost:3000/medicure/routes';
+  //private apiUrl = 'https://shared-server-cxer.onrender.com/medicure/routes';
   constructor(private http: HttpClient) {}
   // Send contact form
   sendMessageForm(name: String, email: String, message: String): Observable<any> {
@@ -116,6 +116,50 @@ export class AuthService {
   //Cancel Appointment
   cancelAppointment(doctorId: String, slotId: string): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/cancel-appointment`, { doctorId, slotId });
+  }
+  //Find doctor details using doctor id
+  fetchDoctorDetailsById(Id: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/doctor-details`, { Id });
+  }
+  //Create New Post
+  createPost(userId: string, content: string, userType: String, email: String, userName: String): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/create-post`, { userId, content, userType, email, userName });
+  }
+  //Fetch All posts
+  fetchPosts(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/fetch-posts`);
+  }
+  //Like posts
+  likePost(postId: string, userId: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/like-post`, { postId, userId });
+  }
+  //Comment Any Post
+  commentPost( postId: String, comment: String, userId: String, userType: String, email: String, parentCommentId: String ): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/comment-post`, { postId, comment, userId, userType, email, parentCommentId });
+  }
+  //Like Comment
+  likeComment(commentId: string, userId: string): Observable<any>{
+    return this.http.post<any>(`${this.apiUrl}/like-comment`, { commentId, userId })
+  }
+  // Delete Post
+  deletePost(postId: string): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/delete-post/${postId}`);
+  }
+  // Delete Comment
+  deleteComment(commentId: string): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/delete-comment/${commentId}`);
+  }
+  calculateBmi(weight: number, height: number): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/bmicalculator`, { weight, height });
+  }
+  requestMeeting(doctorId: String, userId: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/request-meeting`, { doctorId, userId });
+  }
+  getMeetings(doctorId: String): Observable<any>{
+    return this.http.post<any>(`${this.apiUrl}/fetch-meeting-requests`, { doctorId });
+  }
+  scheduleMeeting(doctorId: String, email: string, decission: string): Observable<any>{
+    return this.http.post<any>(`${this.apiUrl}/accept-reject-meeting-request`, { doctorId, email, decission });
   }
 }
 

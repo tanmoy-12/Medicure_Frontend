@@ -1351,3 +1351,75 @@ input{
 .p-details{
   padding: 12px;
 }
+
+/******Community****************/
+.community-container{
+  display: flex;
+  position: relative;
+  height: 350px;
+}
+.community-lower{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  background-color: var(--shade-1);
+}
+.cl1 {
+  background-image: url('https://www.pngarts.com/files/6/Vector-Fitness-PNG-Photo.png');
+  background-color: #101010;
+  height: 100%;
+  width: 50%;
+  clip-path: polygon(0 0, 60% 0, 90% 100%, 0% 100%);
+}
+.cl1-inner{
+  background-color: #a0a0a0e8;
+  backdrop-filter: blr(12px);
+  width: 100%;
+  height: 100%;
+}
+.cu1-content{
+  width: 40%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  color: var(--dark);
+  font-weight: 600;
+  padding: 16px;
+  h1{
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
+  button{
+    width: max-content;
+    background-color: var(--shade-3);
+    border: none;
+    color: var(--shade-1);
+  }
+}
+.community-upper{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+}
+.cl2{
+  background-color: #202020;
+  height: 100%;
+  width: 50%;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 30% 100%);
+}
+.cl2-content{
+  width: 100%;
+  img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}

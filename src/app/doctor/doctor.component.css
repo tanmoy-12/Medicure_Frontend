@@ -282,6 +282,9 @@ width: calc(100% - 240px);
   color: var(--shade-2);
   padding: 8px 16px;
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 .time-slot-c2{
   display: flex;

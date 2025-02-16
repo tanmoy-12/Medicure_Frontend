@@ -393,7 +393,9 @@
           >{{ appointment.time }} {{ appointment.patientName }}
           {{ appointment.patientMail }}</span
         >
-        <button (click)="openPrescriptionPopup(appointment)">Generate Presciption</button>
+        <div class="btns">
+          <button (click)="openPrescriptionPopup(appointment)">Generate Presciption</button>
+        </div>
         <!-- Add this popup form to your component template -->
 <div *ngIf="showPrescriptionPopup" class="prescription-popup">
   <form [formGroup]="prescriptionForm" (ngSubmit)="onSubmitPrescription()">
@@ -430,15 +432,6 @@
   </form>
 </div>
 
-<!-- Trigger button -->
-<div class="appointment-list" *ngIf="doctorDetails.isVerified">
-  <div class="tap">Today's Appointments</div>
-  <div *ngIf="doctorDetails.slots.length == 0">No appointments found.</div>
-  <div *ngFor="let appointment of appointments" class="appointments">
-    <span *ngIf="appointment.occupied == true">{{ appointment.time }} {{ appointment.patientName }} {{ appointment.patientMail }}</span>
-    <button (click)="openPrescriptionPopup(appointment)">Generate Prescription</button>
-  </div>
-</div>
 
       </div>
     </div>

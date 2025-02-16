@@ -10,6 +10,7 @@ export class AuthService {
   //private apiUrl = 'http://localhost:3000/medicure/routes';
   private apiUrl = 'https://shared-server-cxer.onrender.com/medicure/routes';
   constructor(private http: HttpClient) {}
+
   // Send contact form
   sendMessageForm(name: String, email: String, message: String): Observable<any> {
     return this.http.post(`${this.apiUrl}/contact-form`, { name, email, message });
@@ -177,7 +178,7 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/book-bed`, { Id, email });
   }
   generatePrescription(prescriptionData: String): Observable<any> {
-    return this.http.post(`${this.apiUrl}/generate-prescription`, { prescriptionData });
+    return this.http.post(`${this.apiUrl}/generate-prescription`, prescriptionData );
   }
 
 }

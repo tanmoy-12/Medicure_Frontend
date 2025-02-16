@@ -256,7 +256,7 @@ export class DoctorComponent {
     if (this.prescriptionForm.invalid) {
       return;
     }
-
+    console.log(this.prescriptionForm.value)
     const prescriptionData = this.prescriptionForm.value;
     this.authService.generatePrescription(prescriptionData).subscribe(
       response => {

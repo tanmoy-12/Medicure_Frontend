@@ -47,7 +47,7 @@
           <i class="fa-solid fa-stethoscope"></i>
           <span>Find Doctor</span>
         </div>
-        <div class="mf">
+        <div class="mf" (click)="router.navigate(['/hospitals'])">
           <i class="fa-solid fa-hospital"></i>
           <span>Find Hospital</span>
         </div>
@@ -327,15 +327,19 @@
     </section>
     <div id="subscription-popup" class="popup-overlay" *ngIf="showPlanPopup" (click)="closePlanPopup()">
       <div class="popup-content" (click)="$event.stopPropagation()">
-        <span class="close-btn" (click)="closePlanPopup()">&times;</span>
-        <h2>{{ selectedPlan?.name }}</h2>
-        <p>Price: {{ selectedPlan?.price }}</p>
-        <p>Discount: {{ selectedPlan?.discount }}</p>
-        <ul>
-          <li *ngFor="let feature of selectedPlan?.features">{{ feature }}</li>
-        </ul>
-        <p>Extra: {{ selectedPlan?.extra }}</p>
-        <img [src]="selectedPlan?.qr" alt="QR Code" width="150" height="150">
+        <div class="p-details">
+          <span class="close-btn" (click)="closePlanPopup()">&times;</span>
+          <h2>{{ selectedPlan?.name }}</h2>
+          <p>Price: {{ selectedPlan?.price }}</p>
+          <p>Discount: {{ selectedPlan?.discount }}</p>
+          <ul>
+            <li *ngFor="let feature of selectedPlan?.features">{{ feature }}</li>
+          </ul>
+          <p>Extra: {{ selectedPlan?.extra }}</p>
+        </div>
+        <div class="p-image">
+          <img [src]="selectedPlan?.qr" alt="QR Code" width="150" height="150">
+        </div>
       </div>
     </div>
 

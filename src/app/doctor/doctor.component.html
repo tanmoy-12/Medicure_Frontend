@@ -5,7 +5,8 @@
     </div>
     <div class="menu">
       <div class="welcome">
-        <span>Welcome,<br><span style="color: var(--shade-1);">{{ userName }}</span></span>
+        <span>Welcome</span>
+        <span style="color: var(--shade-4);">{{ userName }}</span>
       </div>
 
       <li class="dashboard-active">
@@ -392,6 +393,53 @@
           >{{ appointment.time }} {{ appointment.patientName }}
           {{ appointment.patientMail }}</span
         >
+        <button (click)="openPrescriptionPopup(appointment)">Generate Presciption</button>
+        <!-- Add this popup form to your component template -->
+<div *ngIf="showPrescriptionPopup" class="prescription-popup">
+  <form [formGroup]="prescriptionForm" (ngSubmit)="onSubmitPrescription()">
+    <label>Patient Name</label>
+    <input formControlName="patientName" readonly>
+
+    <label>Patient Email</label>
+    <input formControlName="patientMail" readonly>
+
+    <label>Doctor Name</label>
+    <input formControlName="doctorName" readonly>
+
+    <label>Disease</label>
+    <input formControlName="disease">
+
+    <div formArrayName="medicines">
+      <div *ngFor="let medicine of medicinesControls; let i = index" [formGroupName]="i">
+        <label>Medicine Name</label>
+        <input formControlName="name">
+
+        <label>Dosage</label>
+        <input formControlName="dosage">
+
+        <label>Frequency</label>
+        <input formControlName="frequency">
+
+        <button type="button" (click)="removeMedicine(i)">Remove</button>
+      </div>
+      <button type="button" (click)="addMedicine()">Add Medicine</button>
+    </div>
+
+    <button type="submit">Submit Prescription</button>
+    <button type="button" (click)="closePrescriptionPopup()">Cancel</button>
+  </form>
+</div>
+
+<!-- Trigger button -->
+<div class="appointment-list" *ngIf="doctorDetails.isVerified">
+  <div class="tap">Today's Appointments</div>
+  <div *ngIf="doctorDetails.slots.length == 0">No appointments found.</div>
+  <div *ngFor="let appointment of appointments" class="appointments">
+    <span *ngIf="appointment.occupied == true">{{ appointment.time }} {{ appointment.patientName }} {{ appointment.patientMail }}</span>
+    <button (click)="openPrescriptionPopup(appointment)">Generate Prescription</button>
+  </div>
+</div>
+
       </div>
     </div>
     <div class="appointment-list" *ngIf="doctorDetails.isVerified && meetings.length > 0">

@@ -1,0 +1,32 @@
+<div class="navbar">
+  <app-navbar></app-navbar>
+</div>
+<div class="main">
+  <div class="cards">
+    <div *ngFor="let hospital of hospitals" class="card">
+      <h2>{{ hospital.hospitalName }}</h2>
+      <p>{{ hospital.address.street }}, {{ hospital.address.city }}, {{ hospital.address.state }}, {{ hospital.address.zipCode }}, {{ hospital.address.country }}</p>
+      <p>Contact: {{ hospital.contactNumber }} | Email: {{ hospital.email }}</p>
+      <p>Beds Available: {{ hospital.numberOfBeds }}</p>
+      <p>Doctors: {{ hospital.numberOfDoctors }}</p>
+      <div class="facilities">
+        <p *ngIf="hospital.facilities.icu">ICU Available</p>
+        <p *ngIf="hospital.facilities.nicu">NICU Available</p>
+        <p *ngIf="hospital.facilities.ambulance">Ambulance Available</p>
+        <p *ngIf="hospital.facilities.pharmacy">Pharmacy Available</p>
+        <p *ngIf="hospital.facilities.cafeteria">Cafeteria Available</p>
+        <p *ngIf="hospital.emergencyServices">Emergency Services Available</p>
+      </div>
+      <div class="tap" *ngIf="hospital.bloodBank.length > 0">
+        <div *ngFor="let blood of hospital.bloodBank">
+          <span >
+            <span>{{ blood.bloodType }}: {{ blood.NumberOfBags.bloodBank }}</span>
+          </span>
+        </div>
+      </div>
+      <button *ngIf="hospital.numberOfBeds > 0" (click)="bookBed(hospital._id)">Book Bed</button>
+      <button *ngIf="hospital.facilities.ambulance" (click) = "bookAmbulance()">Book Ambulance</button>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

@@ -44,6 +44,7 @@ export class DoctorComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
   private notification = inject(NotificationService);
+  prescriptionForm: any;
 
   constructor(private fb: FormBuilder) {
     this.doctorForm = this.fb.group({
@@ -117,6 +118,7 @@ export class DoctorComponent {
     },
   ];
   meetings = [{ requestedAt: '', userName: '', email: '' }];
+  showPrescriptionPopup = false;
   fetchMeetings() {
     if (this.userId) {
       this.authService.getMeetings(this.userId).subscribe(
@@ -198,6 +200,7 @@ export class DoctorComponent {
       }
     }
     this.fetchMeetings();
+    this.initializeForm();
   }
   get formControls() {
     return this.doctorForm.controls;
@@ -205,7 +208,66 @@ export class DoctorComponent {
   onSlotChange(slot: any) {
     this.hasChanges = true; // Mark that changes have been made
   }
+  initializeForm() {
+    this.prescriptionForm = this.fb.group({
+      patientName: ['', Validators.required],
+      patientMail: ['', [Validators.required, Validators.email]],
+      doctorName: ['', Validators.required],
+      disease: ['', Validators.required],
+      medicines: this.fb.array([this.createMedicineGroup()])
+    });
+  }
+  get medicinesControls() {
+    return (this.prescriptionForm.get('medicines') as FormArray).controls;
+  }
 
+  createMedicineGroup() {
+    return this.fb.group({
+      name: ['', Validators.required],
+      dosage: ['', Validators.required],
+      frequency: ['', Validators.required]
+    });
+  }
+
+  addMedicine() {
+    const medicines = this.prescriptionForm.get('medicines') as FormArray;
+    medicines.push(this.createMedicineGroup());
+  }
+
+  removeMedicine(index: number) {
+    const medicines = this.prescriptionForm.get('medicines') as FormArray;
+    medicines.removeAt(index);
+  }
+
+  openPrescriptionPopup(appointment: any) {
+    this.prescriptionForm.patchValue({
+      patientName: appointment.patientName,
+      patientMail: appointment.patientMail,
+      doctorName: localStorage.getItem('userName') // Assuming doctor's name is stored in local storage
+    });
+    this.showPrescriptionPopup = true;
+  }
+
+  closePrescriptionPopup() {
+    this.showPrescriptionPopup = false;
+  }
+
+  onSubmitPrescription() {
+    if (this.prescriptionForm.invalid) {
+      return;
+    }
+
+    const prescriptionData = this.prescriptionForm.value;
+    this.authService.generatePrescription(prescriptionData).subscribe(
+      response => {
+        console.log('Prescription generated successfully:', response);
+        this.closePrescriptionPopup();
+      },
+      error => {
+        console.error('Error generating prescription:', error);
+      }
+    );
+  }
   saveEdits() {
     const editedSlots = this.doctorDetails.slots.map((slot: any) => {
       if (!slot.available && slot.patientMail) {
@@ -395,6 +457,7 @@ export class DoctorComponent {
       this.fetchMeetings();
     }
   }
+
   cancelMeeting(email: string){
     if(this.userId){
       this.authService.scheduleMeeting(this.userId, email, 'reject').subscribe(

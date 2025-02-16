@@ -1,7 +1,14 @@
 <div class="main">
   <div class="left-section">
-    <div class="logo">MediCure</div>
+    <div class="logo">
+      <span style="color: #fff;">MediCure</span>
+    </div>
     <div class="menu">
+      <div class="welcome">
+        <span>Welcome</span>
+        <span style="color: var(--shade-4);">{{ userName }}</span>
+      </div>
+
       <li class="dashboard-active">
         <img src="dashboard.png" alt="" width="20px" />&nbsp;&nbsp;
         <p>Dashboard</p>
@@ -12,6 +19,7 @@
           <p>Home</p>
         </li></a
       >
+
       <li (click)="logout()">
         <i class="fa-solid fa-power-off"></i>&nbsp;&nbsp;
         <p>Log Out</p>
@@ -20,14 +28,9 @@
     <hr />
   </div>
   <div class="right-section">
-    <div class="welcome">
-      <h3>Hi, {{ userName }}</h3>
-      <p>Welcome to your admin dashboard!</p>
-    </div>
-    <div class="line"></div>
     <div class="verify-shops">
-      <h4>Verify Doctor Details</h4>
-      <div class="verify-shops-list">
+      <h4 class="tap">Verify Doctor Details</h4>
+      <div class="verify-shops-list" *ngIf="unverifiedDoctors.length > 0">
         <!-- Shop cards -->
         <div class="shop-info" *ngFor="let doctor of unverifiedDoctors">
           <div class="s-details">
@@ -44,6 +47,85 @@
         <button *ngIf="unverifiedDoctors.length < totalDoctors && !isLoading" (click)="loadMore()" class="load-btn">Load More</button>
       </div>
     </div>
+    <!-- <div class="upload-container">
+      <h2>Upload Hospital Data</h2>
+      <textarea [(ngModel)]="jsonData" rows="10" cols="50" placeholder="Enter JSON data here"></textarea>
+      <br>
+      <button (click)="uploadJsonData()">Upload Data</button>
+    </div> -->
+    <!-- add-edit-hospital.component.html -->
+  <h4 class="tap">Add New Hospital Details</h4>
+<form [formGroup]="hospitalForm" (ngSubmit)="onSubmit()" class="hospitalForm">
+  <div>
+    <label>Hospital Name</label>
+    <input formControlName="hospitalName" />
+  </div>
+
+  <div formGroupName="address">
+    <label>Street</label>
+    <input formControlName="street" />
+    <label>City</label>
+    <input formControlName="city" />
+    <label>State</label>
+    <input formControlName="state" />
+    <label>Zip Code</label>
+    <input formControlName="zipCode" />
+    <label>Country</label>
+    <input formControlName="country" />
+  </div>
+
+  <div>
+    <label>Contact Number</label>
+    <input formControlName="contactNumber" />
+  </div>
+
+  <div>
+    <label>Email</label>
+    <input formControlName="email" />
+  </div>
+
+  <div formGroupName="opd">
+    <label>Number of Beds</label>
+    <input formControlName="numberOfBeds" />
+  </div>
+
+  <div formGroupName="ambulance">
+    <label>Number of Ambulances</label>
+    <input formControlName="numberOfAmbulances" />
+  </div>
+
+  <div formArrayName="bloodBank">
+    <div *ngFor="let bloodBank of bloodBankControls.controls; let i = index" [formGroupName]="i">
+      <label>Blood Type</label>
+      <input formControlName="bloodType" />
+      <label>Number of Bags</label>
+      <input formControlName="numberOfBags" />
+      <button type="button" (click)="removeBloodBank(i)">Remove</button>
+    </div>
+    <button type="button" (click)="addBloodBank()">Add Blood Bank</button>
+  </div>
+
+  <div formGroupName="facilities">
+    <label>ICU</label>
+    <input type="checkbox" formControlName="icu" />
+    <label>NICU</label>
+    <input type="checkbox" formControlName="nicu" />
+    <label>Ambulance</label>
+    <input type="checkbox" formControlName="ambulance" />
+    <label>Pharmacy</label>
+    <input type="checkbox" formControlName="pharmacy" />
+    <label>Cafeteria</label>
+    <input type="checkbox" formControlName="cafeteria" />
+  </div>
+
+  <div>
+    <label>Emergency Services</label>
+    <input type="checkbox" formControlName="emergencyServices" />
+  </div>
+
+  <button type="submit" [disabled]="hospitalForm.invalid">Submit</button>
+</form>
+
   </div>
 </div>
 <app-footer></app-footer>

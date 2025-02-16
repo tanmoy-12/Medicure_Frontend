@@ -9,6 +9,7 @@ import { DoctorComponent } from './doctor/doctor.component';
 import { BookingComponent } from './booking/booking.component';
 import { DoctorDetailsComponent } from './doctor-details/doctor-details.component';
 import { CommunityComponent } from './community/community.component';
+import { HospitalsComponent } from './hospitals/hospitals.component';
 
 import { Routes, CanActivate } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard'
@@ -28,5 +29,6 @@ export const routes: Routes = [
   { path: 'booking', component: BookingComponent, canActivate: [OpenGuard]},
   { path: 'doctor-details/:id', component: DoctorDetailsComponent },
   { path: 'community', component: CommunityComponent },
+  { path: 'hospitals', component: HospitalsComponent },
   // Add more routes as needed
 ];

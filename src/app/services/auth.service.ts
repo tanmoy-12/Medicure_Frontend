@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
 
-  private apiUrl = 'http://localhost:3000/medicure/routes';
-  //private apiUrl = 'https://shared-server-cxer.onrender.com/medicure/routes';
+  //private apiUrl = 'http://localhost:3000/medicure/routes';
+  private apiUrl = 'https://shared-server-cxer.onrender.com/medicure/routes';
   constructor(private http: HttpClient) {}
   // Send contact form
   sendMessageForm(name: String, email: String, message: String): Observable<any> {
@@ -161,5 +161,24 @@ export class AuthService {
   scheduleMeeting(doctorId: String, email: string, decission: string): Observable<any>{
     return this.http.post<any>(`${this.apiUrl}/accept-reject-meeting-request`, { doctorId, email, decission });
   }
+  //Add new hospital
+  addHospital(hospital: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/add-hospital`, hospital);
+  }
+
+  editHospital(id: string, hospital: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/edit-hospital/${id}`, hospital);
+  }
+
+  getHospitals(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/hospitals`);
+  }
+  bookBed(Id: string, email: String): Observable<any> {
+    return this.http.post(`${this.apiUrl}/book-bed`, { Id, email });
+  }
+  generatePrescription(prescriptionData: String): Observable<any> {
+    return this.http.post(`${this.apiUrl}/generate-prescription`, { prescriptionData });
+  }
+
 }
 

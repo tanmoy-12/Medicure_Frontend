@@ -54,9 +54,9 @@ export class HomeComponent {
     }
   }
   plans = {
-    'Basic': { name: 'Basic Plan', price: 'Free', discount: 'No discount', features: ['No setup fees', 'Basic coverage', '24/7 support'], extra: 'Limited support', qr: 'https://via.placeholder.com/150' },
-    'Standard': { name: 'Standard Plan', price: '₹ 299 / month', discount: '10% off yearly', features: ['No hidden fees', 'Comprehensive coverage', 'Priority support'], extra: 'Health articles', qr: 'https://via.placeholder.com/150' },
-    'Premium': { name: 'Premium Plan', price: '₹ 599 / month', discount: '15% off yearly', features: ['All-inclusive coverage', 'Dedicated support', 'Customizable options'], extra: 'Free teleconsultation', qr: 'https://via.placeholder.com/150' }
+    'Basic': { name: 'Basic Plan', price: 'Free', discount: 'No discount', features: ['No setup fees', 'Basic coverage', '24/7 support'], extra: 'Limited support', qr: 'https://www.pngmart.com/files/10/Qr-Code-Background-PNG.png' },
+    'Standard': { name: 'Standard Plan', price: '₹ 299 / month', discount: '10% off yearly', features: ['No hidden fees', 'Comprehensive coverage', 'Priority support'], extra: 'Health articles', qr: 'https://www.pngmart.com/files/10/Qr-Code-Background-PNG.png' },
+    'Premium': { name: 'Premium Plan', price: '₹ 599 / month', discount: '15% off yearly', features: ['All-inclusive coverage', 'Dedicated support', 'Customizable options'], extra: 'Free teleconsultation', qr: 'https://www.pngmart.com/files/10/Qr-Code-Background-PNG.png' }
   };
 
   openPlanPopup(planName: keyof typeof this.plans) {

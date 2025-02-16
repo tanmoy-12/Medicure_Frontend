@@ -18,6 +18,13 @@
 
 .welcome{
   color: var(--light);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  font-size: larger;
+  text-align: center;
+  font-weight: 600;
+  margin: 16px 0;
 }
 /*******Menu Section*********/
 .left-section{

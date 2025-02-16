@@ -21,14 +21,14 @@
         <span style="font-size: larger;color: var(--shade-2);">{{ doctor.specialization }}</span><br>
         <hr>
         <span>{{ doctor.doctorRegistrationNumber }}</span><br>
-        <span>{{ doctor.experienceInYears }}+ Years Expierence</span>
+        <span>{{ doctor.experienceInYears }}+ Years Expierence</span><br>
         <span>{{ doctor.languages.join(', ') }}</span><br>
-
+        <button (click)="requestMeeting(doctor._id)" class="btn">Schedule Meeting</button>
       </div>
     </div>
     <div class="doctor-details">
       <div class="details-middle">
-        <h2>Description</h2> <span>{{ doctor.details }}</span><br>
+        <h2>Description</h2><span>{{ doctor.details }}</span><br>
         <strong>Experience:</strong> <span>{{ doctor.experience.join(', ') }}</span><br>
         <strong>Qualification:</strong> <span>{{ doctor.qualification.join(', ') }}</span><br>
         <strong>Clinic Name:</strong> <span>{{ doctor.clinicName }}</span><br>
